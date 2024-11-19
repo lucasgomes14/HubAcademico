@@ -10,4 +10,15 @@ public class AcademicHubApplication {
 		SpringApplication.run(AcademicHubApplication.class, args);
 	}
 
+
+
+
+
+
+
+
+
+
+
+
 }
