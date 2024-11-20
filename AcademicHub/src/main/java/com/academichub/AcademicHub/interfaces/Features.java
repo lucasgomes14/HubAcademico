@@ -1,5 +1,7 @@
 package com.academichub.AcademicHub.interfaces;
 
+import com.academichub.AcademicHub.model.User;
+
 public interface Features {
     Boolean login(String email, String password);
     Boolean register(String name, String lastName, String email, String password, Enum type);
