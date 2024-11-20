@@ -13,8 +13,8 @@ public class User {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "lastname", nullable = false)
-    private String lastname;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
     @Column(name = "email", nullable = false)
     private String email;
@@ -42,12 +42,12 @@ public class User {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
