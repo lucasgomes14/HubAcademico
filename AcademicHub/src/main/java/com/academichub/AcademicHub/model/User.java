@@ -29,6 +29,7 @@ public class User {
     private UserType userType;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @Column(name = "posts")
     private List<Post> posts;
 
     public Long getId() {
