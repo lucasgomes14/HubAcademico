@@ -1,7 +1,10 @@
 package com.academichub.AcademicHub.interfaces;
 
+import com.academichub.AcademicHub.model.Comment;
 import com.academichub.AcademicHub.model.Post;
 import com.academichub.AcademicHub.model.User;
+
+import java.util.List;
 
 public interface Features {
     Boolean login(String email, String password);
@@ -14,7 +17,7 @@ public interface Features {
     Boolean updateUser(User user);
     Boolean deletePost(Post post,User user);
     Boolean deleteUser(User user);
-    Boolean newPost(String description, T content);
+    Boolean newPost(String description, byte[] content);
     Integer getLikes(Long idPost);
     void addLike(Long idPost, Long idUser);
     List<Comment> getComments(Long idPost);
