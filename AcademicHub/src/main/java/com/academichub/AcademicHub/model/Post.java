@@ -18,7 +18,7 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<ContentPost> content;
 
-    @OneToMany
+    @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

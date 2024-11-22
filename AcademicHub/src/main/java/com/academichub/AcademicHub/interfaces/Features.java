@@ -1,5 +1,6 @@
 package com.academichub.AcademicHub.interfaces;
 
+import com.academichub.AcademicHub.model.Post;
 import com.academichub.AcademicHub.model.User;
 
 public interface Features {
