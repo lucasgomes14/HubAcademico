@@ -1,9 +1,9 @@
 package com.academichub.AcademicHub.interfaces;
 
-import com.academichub.AcademicHub.model.Comment;
-import com.academichub.AcademicHub.model.Post;
-import com.academichub.AcademicHub.model.User;
-import com.academichub.AcademicHub.model.UserType;
+import com.academichub.AcademicHub.Models.Comment;
+import com.academichub.AcademicHub.Models.Post;
+import com.academichub.AcademicHub.Models.User;
+import com.academichub.AcademicHub.Models.UserType;
 
 import java.util.List;
 
