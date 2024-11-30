@@ -8,6 +8,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.academichub.AcademicHub.Validators.EmailValidator;
+import com.academichub.AcademicHub.Validators.NameValidator;
+import com.academichub.AcademicHub.Validators.PasswordValidator;
+
 @Getter
 @Setter
 @Entity
@@ -17,6 +21,10 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "user", nullable = false)
+    @NameValidator
+    private String user;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -31,9 +39,11 @@ public class User {
     private LocalDateTime userUpdateDateAndTime;
 
     @Column(name = "email", nullable = false, unique = true)
+    @EmailValidator
     private String email;
 
     @Column(name = "password", nullable = false)
+    @PasswordValidator
     private String password;
 
     @Enumerated(EnumType.STRING)
