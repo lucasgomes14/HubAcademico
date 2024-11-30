@@ -10,7 +10,7 @@ public class EmailConstraintValidator implements ConstraintValidator<EmailValida
     @Override
     public void initialize(EmailValidator constraintAnnotation) {
         this.type = constraintAnnotation.message();
-    }
+    } 
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
@@ -18,9 +18,9 @@ public class EmailConstraintValidator implements ConstraintValidator<EmailValida
             return false; 
         }
 
-        if (value.contains("@ifpb.edu.br")) {
+        if (value.contains("@ifpb.edu.br")) { //professor
             return true;
-        } else if (value.contains("@academico.ifpb.edu.br")) {
+        } else if (value.contains("@academico.ifpb.edu.br")) { //aluno
             return true;
         } else {
             return false;

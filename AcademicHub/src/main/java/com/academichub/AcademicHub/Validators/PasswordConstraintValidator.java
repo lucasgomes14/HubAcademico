@@ -20,5 +20,4 @@ public class PasswordConstraintValidator implements ConstraintValidator<Password
         return isLongEnough && hasNumber && hasSpecialCharacter;
 
     }
-    
 }
