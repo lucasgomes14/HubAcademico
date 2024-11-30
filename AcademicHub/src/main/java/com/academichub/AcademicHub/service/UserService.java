@@ -1,4 +1,4 @@
-package com.academichub.AcademicHub.Service;
+package com.academichub.AcademicHub.service;
 
 import com.academichub.AcademicHub.exceptions.*;
 import com.academichub.AcademicHub.model.Course;

@@ -1,4 +1,4 @@
-package com.academichub.AcademicHub.Validators;
+package com.academichub.AcademicHub.validators;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

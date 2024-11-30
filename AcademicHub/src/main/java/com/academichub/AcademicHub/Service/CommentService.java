@@ -1,4 +1,4 @@
-package com.academichub.AcademicHub.Service;
+package com.academichub.AcademicHub.service;
 
 import org.springframework.stereotype.Service;
 

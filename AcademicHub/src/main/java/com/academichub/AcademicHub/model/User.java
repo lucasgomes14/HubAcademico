@@ -8,9 +8,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.academichub.AcademicHub.Validators.EmailValidator;
-import com.academichub.AcademicHub.Validators.NameValidator;
-import com.academichub.AcademicHub.Validators.PasswordValidator;
+import com.academichub.AcademicHub.validators.EmailValidator;
+import com.academichub.AcademicHub.validators.NameValidator;
+import com.academichub.AcademicHub.validators.PasswordValidator;
 
 @Getter
 @Setter

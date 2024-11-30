@@ -1,4 +1,4 @@
-package com.academichub.AcademicHub.Validators;
+package com.academichub.AcademicHub.validators;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
