@@ -1,8 +1,8 @@
-package com.academichub.AcademicHub.controller;
+package com.academichub.AcademicHub.Controller;
 
 import com.academichub.AcademicHub.model.Course;
 import com.academichub.AcademicHub.model.UserType;
-import com.academichub.AcademicHub.service.UserService;
+import com.academichub.AcademicHub.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

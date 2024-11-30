@@ -11,11 +11,9 @@ public class NameConstraintValidator implements ConstraintValidator<NameValidato
             return false;
         }
 
-        boolean isLongEnough = value.length() > 6;
+        boolean isLongEnough = value.length() > 5 && value.length() < 11;
 
-        boolean hasSpecialCharacter = value.matches(".*[!@#$%^&*(),.?\":{}|<>].*");
-
-        return isLongEnough && hasSpecialCharacter;
+        return isLongEnough;
     }
 
 }
