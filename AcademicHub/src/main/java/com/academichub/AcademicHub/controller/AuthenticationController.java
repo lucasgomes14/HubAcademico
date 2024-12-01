@@ -1,13 +1,14 @@
 package com.academichub.AcademicHub.controller;
 
-import com.academichub.AcademicHub.model.Course;
-import com.academichub.AcademicHub.model.UserType;
+import com.academichub.AcademicHub.config.TokenService;
+import com.academichub.AcademicHub.model.user.*;
 import com.academichub.AcademicHub.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -18,16 +19,40 @@ public class AuthenticationController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/register")
-    public Boolean register(@RequestParam String name, @RequestParam String lastName,
-                            @RequestParam LocalDateTime dateAndTimeOfUserCreation, @RequestParam String email,
-                            @RequestParam String password, @RequestParam UserType userType, @RequestParam Course course) {
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-        return userService.cadasterUser(name, lastName, dateAndTimeOfUserCreation, email, password, userType, course);
+    @Autowired
+    private TokenService tokenService;
+
+    @PostMapping("/register")
+    public ResponseEntity register(@RequestBody @Validated RegisterDTO data) {
+
+        UserRole role = UserRole.valueOf(data.role());
+        Course course = Course.valueOf(data.course());
+
+        User user = new User();
+        user.setName(data.name());
+        user.setLastName(data.lastName());
+        user.setUsername(data.username());
+        user.setEmail(data.email());
+        user.setPassword(data.password());
+        user.setRole(role);
+        user.setCourse(course);
+        user.setDateAndTimeOfUserCreation(LocalDateTime.now());
+
+        userService.cadasterUser(user);
+
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/login")
-    public Boolean login(@RequestParam String email, @RequestParam String password) {
-        return userService.loginUser(email, password);
+    public ResponseEntity login(@RequestBody @Validated AuthenticationDTO data) {
+        UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
+        var auth = authenticationManager.authenticate(usernamePassword);
+
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 }
