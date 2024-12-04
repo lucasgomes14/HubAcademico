@@ -36,7 +36,7 @@ public class UserService {
     }
 
     private void validateEmail(String email) {
-        if (email == null) {
+        if (email == null || email.isBlank()) {
             throw new NullAndDomainEmailException("Campo email vazio!");
         }
         if (!email.endsWith("@academico.ifpb.edu.br")) {
@@ -49,33 +49,29 @@ public class UserService {
     }
 
     private void validateName(String name) {
-        if (name == null) {
+        if (name == null || name.isBlank()) {
             throw new NullNameException("Nome vazio!");
         }
     }
 
     private void validateLastName(String lastName) {
-        if (lastName == null) {
+        if (lastName == null || lastName.isBlank()) {
             throw new NullLastNameException("Último nome vazio!");
         }
     }
 
     private void validatePassword(String password) {
-        if (password.length() < 8) {
+        if (password == null || password.length() < 8) {
             throw new SecurityPasswordException("Senha tem que ter no mínimo 8 dígitos");
         }
 
-        boolean securePassword = password.chars().anyMatch(Character::isUpperCase)
-                && password.chars().anyMatch(Character::isLowerCase)
-                && password.chars().anyMatch(Character::isDigit);
-
-        if (!securePassword) {
-            throw new SecurityPasswordException("Senha tem que ter digitos maiúsculo, minúsculo e digito");
+        if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$")) {
+            throw new SecurityPasswordException("Senha precisa ter maiúsculas, minúsculas e números.");
         }
     }
 
     private void validateUsername(String username) {
-        if (username == null) {
+        if (username == null || username.isBlank()) {
             throw new NullUsernameException("Nome de usuário vazio!");
         }
 

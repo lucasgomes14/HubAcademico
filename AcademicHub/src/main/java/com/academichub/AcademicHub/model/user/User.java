@@ -14,6 +14,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/* implementa o userDetails que é uma classe do spring security,
+    que é usada para identificar uma classe que represente um usuário
+    que será autenticado na aplicação
+*/
+
 @Getter
 @Setter
 @Entity
@@ -67,21 +72,28 @@ public class User implements UserDetails {
     )
     private List<User> friends = new ArrayList<>();
 
+    // método para quando o spring security for consultar um entidade para vê quais são os papéis de cada tipo de usuário(student, teacher, coordinator, admin)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (this.role == UserRole.STUDENT) return List.of(new SimpleGrantedAuthority("ROLE_STUDENT"));
         else if (this.role == UserRole.TEACHER) return List.of(new SimpleGrantedAuthority("ROLE_TEACHER"));
         else if (this.role == UserRole.COORDINATOR) return List.of(new SimpleGrantedAuthority("ROLE_COORDINATOR"));
-        else if (this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_STUDENT"), new SimpleGrantedAuthority("ROLE_TEACHER"), new SimpleGrantedAuthority("ROLE_COORDINATOR"));
+        else if (this.role == UserRole.ADMIN)
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"),
+                new SimpleGrantedAuthority("ROLE_STUDENT"),
+                new SimpleGrantedAuthority("ROLE_TEACHER"),
+                new SimpleGrantedAuthority("ROLE_COORDINATOR"));
 
         return List.of();
     }
 
+    // método que retorna o login do usuário(email ou username)
     @Override
     public String getUsername() {
         return username;
     }
 
+    // esses outros métodos são mais avançados e tem que estudar eles para fazer
     @Override
     public boolean isAccountNonExpired() {
         return UserDetails.super.isAccountNonExpired();
