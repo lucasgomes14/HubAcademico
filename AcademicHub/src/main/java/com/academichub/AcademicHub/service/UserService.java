@@ -1,15 +1,11 @@
 package com.academichub.AcademicHub.service;
 
 import com.academichub.AcademicHub.exceptions.*;
-import com.academichub.AcademicHub.model.user.Course;
 import com.academichub.AcademicHub.model.user.User;
-import com.academichub.AcademicHub.model.user.UserRole;
 import com.academichub.AcademicHub.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 
 @Service
 public class UserService {
