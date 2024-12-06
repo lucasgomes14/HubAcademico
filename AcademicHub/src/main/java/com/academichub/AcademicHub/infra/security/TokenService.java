@@ -55,7 +55,7 @@ public class TokenService {
                     .verify(token) // decriptografa
                     .getSubject(); // devolve o usuario do token
         } catch (JWTVerificationException exception) {
-            return "";
+            return null;
         }
     }
 

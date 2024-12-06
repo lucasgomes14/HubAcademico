@@ -1,12 +1,14 @@
 package com.academichub.AcademicHub.controller;
 
+import com.academichub.AcademicHub.dto.LoginRequestDTO;
+import com.academichub.AcademicHub.dto.LoginResponseDTO;
+import com.academichub.AcademicHub.dto.RegisterDTO;
 import com.academichub.AcademicHub.infra.security.TokenService;
 import com.academichub.AcademicHub.model.user.*;
 import com.academichub.AcademicHub.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,27 +16,29 @@ import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthenticationController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private TokenService tokenService;
+    private final TokenService tokenService;
 
     /* a entrada vai ser um json que vai ser validado e o paramentro está
        em model/user/RegisterDTO coloquei assim para ficar mais organizado e limpo*/
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Validated RegisterDTO data) {
+    public ResponseEntity register(@RequestBody @Validated RegisterDTO body) {
 
-        User user = createUser(data);
+        User user = userService.cadasterUser(body);
 
-        userService.cadasterUser(user);
+        if (user != null) {
+            String token = tokenService.generateToken(user);
 
-        return ResponseEntity.ok().build();
+            return ResponseEntity.ok(new LoginResponseDTO(user.getEmail(), token));
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 
     /* a entrada vai ser um json que vai ser validado e o paramentro está
@@ -42,34 +46,13 @@ public class AuthenticationController {
        esse método ele faz o hash do login e senha e compara com os usuários que estão no banco
     */
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Validated AuthenticationDTO data) {
-        // o spring security consulta no service/AuthenticationService
-        var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
+    public ResponseEntity login(@RequestBody @Validated LoginRequestDTO body) {
+        User user = userService.userLogin(body.email());
 
-        // authentica o usuario e senha
-        var auth = authenticationManager.authenticate(usernamePassword);
-
-        // gera o token do usuario
-        var token = tokenService.generateToken((User) auth.getPrincipal());
-
-        // retorna o ok e o token
-        return ResponseEntity.ok(new LoginResponseDTO(token));
-    }
-
-    private User createUser(RegisterDTO data) {
-        UserRole role = UserRole.valueOf(data.role());
-        Course course = Course.valueOf(data.course());
-
-        User user = new User();
-        user.setName(data.name());
-        user.setLastName(data.lastName());
-        user.setUsername(data.username());
-        user.setEmail(data.email());
-        user.setPassword(data.password());
-        user.setRole(role);
-        user.setCourse(course);
-        user.setDateAndTimeOfUserCreation(LocalDateTime.now());
-
-        return user;
+        if (passwordEncoder.matches(body.password(), user.getPassword())) {
+            String token = tokenService.generateToken(user);
+            return ResponseEntity.ok(new LoginResponseDTO(user.getEmail(), token));
+        }
+        return ResponseEntity.badRequest().build();
     }
 }
