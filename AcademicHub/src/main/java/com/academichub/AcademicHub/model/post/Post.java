@@ -1,5 +1,7 @@
-package com.academichub.AcademicHub.model;
+package com.academichub.AcademicHub.model.post;
 
+import com.academichub.AcademicHub.model.comment.Comment;
+import com.academichub.AcademicHub.model.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
