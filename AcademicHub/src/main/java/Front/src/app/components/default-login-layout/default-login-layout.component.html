@@ -1,0 +1,27 @@
+<main>
+    <section class="form-section">
+        <img src="assets/svg/logo.svg"/>
+        <!--input vai vir la do arquivo .ts e do component da page-->
+       <h2>{{ title }}</h2>
+       <ng-content></ng-content>
+       <div class="btn-wrapper">
+            <button 
+                class="btn-primary" 
+                (click)="submit()"
+                [disabled]="disablePrimaryBtn"
+            >
+                {{ primaryBtnText }}</button>
+            <div class="divider">
+                <div></div>
+                <span>or</span>
+                <div></div>
+            </div>
+            <button class="btn-secondary" (click)="navigate()">{{ secondaryBtnText }}</button>
+       </div>
+    </section>
+    <section class="main-section">
+        <h2>A REDE SOCIAL DO SEU CAMPUS!</h2>
+        <img src="assets/svg/fundo.svg" alt="Illustration made by storyset from www.flaticon.com"/>
+    </section>
+</main>
+

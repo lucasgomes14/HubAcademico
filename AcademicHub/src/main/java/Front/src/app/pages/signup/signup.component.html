@@ -1,0 +1,41 @@
+<app-default-login-layout
+    title="Sign in and start today!"
+    primaryBtnText="Signup Now"
+    secondaryBtnText="Login Now"
+    (submit)="submit()"
+    (navigate)="navigate()"
+    [disablePrimaryBtn]="!signupForm.valid">
+    <form [formGroup]="signupForm">
+        <app-primary-input
+            formControlName = "username"
+            inputName="username"
+            type="text"
+            label="Your Username"
+            placeholder="Pedro Paulo">
+            <img src="assets/user.png" alt="https://www.flaticon.com/br/icones-gratis/do-utilizador do-utilizador ícones Do-utilizador ícones criados por Tempo_doloe - Flaticon"/>
+        </app-primary-input>
+        <app-primary-input
+            formControlName = "email"
+            inputName="email"
+            type="email"
+            label="Email"
+            placeholder="pedrop@gmail.com">
+            <img src="assets/svg/email.svg"/>
+        </app-primary-input>
+        <app-primary-input
+        formControlName="password"
+            inputName="password"
+            type="password"
+            label="Your Password">
+            <img src="assets/svg/password.svg"/>
+        </app-primary-input>
+        <app-primary-input
+        formControlName="passwordConfirm"
+            inputName="passwordConfirm"
+            type="password"
+            label="Confirm your Password">
+            <img src="assets/svg/password.svg"/>
+        </app-primary-input>        
+    </form>
+</app-default-login-layout>
+
