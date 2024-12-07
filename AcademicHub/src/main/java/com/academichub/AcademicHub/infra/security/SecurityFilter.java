@@ -1,5 +1,7 @@
 package com.academichub.AcademicHub.infra.security;
 
+import com.academichub.AcademicHub.exceptions.UserNotFoundException;
+import com.academichub.AcademicHub.model.user.User;
 import com.academichub.AcademicHub.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -7,12 +9,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 // extende OncePerRequestFilter que um filtro que acontece uma vez a cada requisição
 @Component
@@ -28,14 +31,17 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var token = this.recoveryToken(request);
+        var email = tokenService.validateToken(token);
 
-        if (token != null) {
-            // verifica o token e caso nao há exceção vai ter o usuario que pega no banco
-            var login = tokenService.validateToken(token);
-            UserDetails user = userRepository.findByEmail(login);
+        if (email != null) {
+            User user = userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
 
-            // verifica o usuario passando todas as informações que o spring security vai precisar para fazer as validações nas proximos end points
-            var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+            var roles = List.of("STUDENT", "TEACHER", "COORDINATOR", "ADMIN");
+            var authorities = roles.stream()
+                    .map(SimpleGrantedAuthority::new)
+                    .toList();
+
+            var authentication = new UsernamePasswordAuthenticationToken(email, null, authorities);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         // chamando o proximo filtro que é o que chama la no SecurityConfiguration que vai ser o UsernamePasswoedAuthenticationFilter.class
