@@ -61,6 +61,6 @@ public class TokenService {
 
     // vai expirar o token em 1 dia
     private Instant generateExpirationDate() {
-        return LocalDateTime.now().plusDays(1).toInstant(ZoneOffset.of("-03:00"));
+        return LocalDateTime.now().plusHours(1).toInstant(ZoneOffset.of("-03:00"));
     }
 }
