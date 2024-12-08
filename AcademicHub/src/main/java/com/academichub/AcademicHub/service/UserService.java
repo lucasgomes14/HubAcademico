@@ -105,7 +105,7 @@ public class UserService {
             throw new ContainsSpaceException();
         }
 
-        if (username.matches("^(?!.*[<>\"'%20%3C%3E%27%22%2F]).+$")) {
+        if (username.matches(".*[<>\"'%20%3C%3E%27%22%2F].*")) {
             throw new ContainsSpecialCharactersException();
         }
     }
