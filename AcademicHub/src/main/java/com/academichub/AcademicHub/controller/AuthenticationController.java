@@ -3,7 +3,6 @@ package com.academichub.AcademicHub.controller;
 import com.academichub.AcademicHub.dto.LoginRequestDTO;
 import com.academichub.AcademicHub.dto.LoginResponseDTO;
 import com.academichub.AcademicHub.dto.RegisterDTO;
-import com.academichub.AcademicHub.dto.RegisterResponseDTO;
 import com.academichub.AcademicHub.infra.security.TokenService;
 import com.academichub.AcademicHub.model.user.*;
 import com.academichub.AcademicHub.service.UserService;
@@ -27,14 +26,12 @@ public class AuthenticationController {
     /* a entrada vai ser um json que vai ser validado e o paramentro está
        em model/user/RegisterDTO coloquei assim para ficar mais organizado e limpo*/
     @PostMapping("/register")
-    public ResponseEntity<RegisterResponseDTO> register(@RequestBody @Validated RegisterDTO body) {
+    public ResponseEntity<?> register(@RequestBody @Validated RegisterDTO body) {
 
         User user = userService.cadasterUser(body);
 
         if (user != null) {
-            String token = tokenService.generateToken(user);
-
-            return ResponseEntity.ok(new RegisterResponseDTO(user.getEmail(), token));
+            return ResponseEntity.ok().build();
         }
 
         return ResponseEntity.badRequest().build();
