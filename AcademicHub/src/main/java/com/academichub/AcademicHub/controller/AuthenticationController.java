@@ -33,9 +33,7 @@ public class AuthenticationController {
         User user = userService.cadasterUser(body);
 
         if (user != null) {
-            String token = tokenService.generateToken(user);
-
-            return ResponseEntity.ok(new LoginResponseDTO(user.getEmail(), token));
+            return ResponseEntity.ok().build();
         }
 
         return ResponseEntity.badRequest().build();
