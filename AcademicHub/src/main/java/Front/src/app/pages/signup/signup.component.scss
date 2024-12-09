@@ -2,8 +2,11 @@ form {
   width: 100%; /* O formulário ocupa toda a largura disponível */
   display: flex;
   flex-direction: column; /* Mantém os elementos alinhados em coluna inicialmente */
-  gap: 16px; /* Espaçamento entre os elementos */
-  margin-bottom: 34px;
+  gap: 9px; /* Espaçamento entre os elementos */
+  margin-bottom: 22px;
+  overflow: hidden;
+  max-height: max-content;
+  
 }
 
 .name, .lastname {
@@ -15,6 +18,26 @@ form {
   justify-content: space-between; /* Espaçamento uniforme entre os elementos */
   gap: 16px; /* Espaçamento entre os itens */
 }
+
+.password, .passwordConfirm {
+  width: calc(50% - 8px); /* Cada campo ocupa 50% menos o gap */
+}
+
+.pass {
+  display: flex; /* Coloca os elementos lado a lado */
+  justify-content: space-between; /* Espaçamento uniforme entre os elementos */
+  gap: 16px; /* Espaçamento entre os itens */
+}
+
+.select-box {
+  margin: 10px;
+  justify-content: center;
+  display: flex;
+  gap: 16px;
+
+}
+
+
 
 /* Ajuste para telas menores */
 @media (max-width: 768px) {
