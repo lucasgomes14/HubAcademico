@@ -14,7 +14,6 @@ export class LoginService {
   constructor(private httpClient: HttpClient) { }
 
   login(email: string, password: string ){
-    //não botei a url do backend pq ainda n tem kkkk
     return this.httpClient.post<LoginResponse>(this.apiUrl, { email, password}).pipe(
       tap((value) => {
         sessionStorage.setItem("email", value.email)
@@ -22,16 +21,6 @@ export class LoginService {
       })
     )
   }
-  //quando retornar aí, vai retornar um token
-  //register(username: string,  email: string , password: string ){
-    //não botei a url do backend pq ainda n tem kkkk
-    //return this.httpClient.post<LoginResponse>(this.apiUrl, { username, email, password}).pipe(
-      //tap((value) => {
-        //sessionStorage.setItem("auth-token", value.token)
-        //sessionStorage.setItem("username", value.username)
-        //sessionStorage.setItem("username", value.email)
-      //})
-    //)
-  //}
+  
 
 }
