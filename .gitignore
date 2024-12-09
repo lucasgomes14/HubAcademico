@@ -1,0 +1,9 @@
+# Ignorar pastas e arquivos de build
+/build/
+*.class
+
+# Ignorar arquivos de configuração da IDE
+.idea/
+*.iml
+.vscode/
+.angular/
