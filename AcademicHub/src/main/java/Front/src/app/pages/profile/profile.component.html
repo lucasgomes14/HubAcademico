@@ -1,1 +1,152 @@
-<p>profile works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+</head>
+<body>
+    <!-- Container principal -->
+    <div class="profile-container">
+      <!-- Imagem de capa -->
+      <img src="assets/profile-cover.jpg" class="cover-image">
+      <!-- Detalhes do perfil -->
+      <div class="profile-details">
+        <div class="pd-left">
+          <div class="pd-row">
+            <!-- Imagem do perfil -->
+            <img src="assets/profile-image.png" class="profile-image"/>
+            <!-- Informações do usuário -->
+            <div class="user-info">
+              <h3>Robertin</h3>
+              <p class="username">&#64;robertin22</p>
+              <p class="bio">fi de bandido e pilantra</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lado direito: botão e estatísticas -->
+        <div class="pd-right">
+            <!-- Botão de edição do perfil -->
+            <button type="button" (click)="showModal()">Editar Perfil</button>
+            <div class="counts">
+              <p class="following"><b>20</b> Following</p>
+              <p class="followers" (click)="showFollowers()"><b>120</b> Followers</p>
+            </div>
+        </div>
+      </div>
+
+      <!-- Modal para exibir os seguidores -->
+      <div id="followersModal" class="modal">
+        <div class="modal-content">
+          <span class="close-btn" (click)="closeFollowersModal()">&times;</span>
+          <h2>Seguidores</h2>
+
+          <!-- Lista de seguidores será inserida dinamicamente aqui -->
+          <div id="followersList" class="followers-list"></div>
+        </div>
+      </div>
+
+      <!-- Modal para editar perfil -->
+      <div id="editModal" class="modal">
+        <div class="modal-content">
+          <span class="close-btn" (click)="closeModal()">&times;</span>
+          <h2>Editar Perfil</h2>
+
+          <!-- Formulário de edição -->
+          <form id="editProfileForm" onsubmit="submitForm(event)">
+            <div class="form-group">
+              <label for="name">Nome</label>
+              <input type="text" id="name" placeholder="Digite seu nome" required />
+            </div>
+
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" id="username" placeholder="Digite seu username" required />
+            </div>
+
+            <div class="form-group">
+              <label for="bio">Bio</label>
+              <textarea id="bio" placeholder="Digite uma breve descrição sobre você" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="profileImage">Imagem de Perfil</label>
+              <input type="file" id="profileImage" onchange="onImageChange(event)" />
+            </div>
+
+            <div class="form-actions">
+              <button type="submit">Salvar Alterações</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Informações gerais e colunas -->
+      <div class="profile-info">
+        <!-- Coluna de posts -->
+        <div class="post-col">
+          <!-- Caixa de escrever post -->
+          <div class="write-post-container">
+            <div class="user-profile">
+              <img src="assets/profile-image.png">
+              <div class="user-post-info">
+                  <p>Robertin</p>
+                  <small>&#64;robertin22</small>
+              </div>
+            </div>
+
+            <!-- Campo de texto e links de anexos -->
+            <div class="post-input-container">
+              <textarea placeholder="What's on your mind, Robertin?" maxlength="200" (input)="autoResize($event)"></textarea>
+              <div class="add-post-links">
+                <a href="#" (click)="triggerFileInput($event)"><img src="assets/content.png"></a>
+                <button>Post</button>
+              </div>
+              <!-- Input para seleção de arquivo de imagem -->
+              <input type="file" id="fileInput" style="display: none;" (change)="handleFileChange($event)" accept="image/*">
+            </div>
+          </div>
+
+          <!-- Primeira postagem -->
+          <div class="post-container">
+            <div class="user-profile">
+              <img src="assets/profile-image.png">
+              <div class="user-post-info">
+                <p>Robertin</p>
+                <span>Dez 7 - 04:30 pm</span>
+              </div>
+            </div>
+            <p class="post-text">O caba tentando dormir e o gato abrindo as panela, é foda...</p>
+
+            <div class="post-row">
+              <div class="activity-icons">
+                <div><img src="assets/likes.png">120</div>
+                <div><img src="assets/replies.png">2</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Segunda postagem -->
+          <div class="post-container">
+            <div class="user-profile">
+              <img src="assets/profile-image.png">
+              <div class="user-post-info">
+                <p>Robertin</p>
+                <span>Dez 7 - 03:35 pm</span>
+              </div>
+            </div>
+            <p class="post-text">Mermão, que sono é esse...</p>
+
+            <div class="post-row">
+              <div class="activity-icons">
+                <div><img src="assets/likes.png">120</div>
+                <div><img src="assets/replies.png">2</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
