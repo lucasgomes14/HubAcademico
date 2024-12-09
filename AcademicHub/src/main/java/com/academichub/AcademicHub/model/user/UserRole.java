@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum UserRole {
     STUDENT("student"),
-    TEACHER("professor"),
+    TEACHER("teacher"),
     COORDINATOR("coordinator"),
     ADMIN("admin");
 
@@ -14,5 +14,4 @@ public enum UserRole {
     UserRole(String role) {
         this.role = role;
     }
-
 }

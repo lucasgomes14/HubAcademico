@@ -7,8 +7,6 @@ import com.academichub.AcademicHub.model.user.User;
 import com.academichub.AcademicHub.model.user.UserRole;
 import com.academichub.AcademicHub.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -101,6 +99,14 @@ public class UserService {
 
         if (userRepository.findByUsername(username).isPresent()) {
             throw new ExistingUsernameException();
+        }
+
+        if (username.contains(" ")) {
+            throw new ContainsSpaceException();
+        }
+
+        if (username.matches(".*[<>\"'%20%3C%3E%27%22%2F].*")) {
+            throw new ContainsSpecialCharactersException();
         }
     }
 }

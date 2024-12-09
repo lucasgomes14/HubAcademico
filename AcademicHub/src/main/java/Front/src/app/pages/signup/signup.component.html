@@ -45,15 +45,15 @@
       placeholder="cirilo@academico.ifpb.edu.br">
       <img src="assets/svg/email.svg"/>
     </app-primary-input>
-    
+
     <div class="select-box">
 
-      <label for="roles">Qual sua função?</label>
+      <label for="role">Qual sua função?</label>
       <select formControlName="role" id="role">
         <option value="">Selecione sua função</option>
-        <option value="student">Estudante</option>
-        <option value="professor">Professor</option>
-        <option value="coordinator">Coordenador</option>
+        <option value="STUDENT">Estudante</option>
+        <option value="TEACHER">Professor</option>
+        <option value="COORDINATOR">Coordenador</option>
       </select>
 
       <label for="course">Qual seu curso?</label>
@@ -90,7 +90,7 @@
       <span *ngIf="signupForm.get('password')?.hasError('required')">Senha é obrigatória.</span>
       <span *ngIf="signupForm.get('password')?.hasError('minlength')">Senha deve ter pelo menos 6 caracteres.</span>
     </div>
-    
+
     <div *ngIf="signupForm.get('email')?.errors">
       <span *ngIf="signupForm.get('email')?.hasError('required')">O email é obrigatório.</span>
       <span *ngIf="signupForm.get('email')?.hasError('email')">Formato de email inválido.</span>
