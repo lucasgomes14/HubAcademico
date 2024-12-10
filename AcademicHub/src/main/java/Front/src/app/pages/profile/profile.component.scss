@@ -35,7 +35,7 @@ body {
 
 /* Contêiner principal das informações do perfil e postagens */
 .profile-info {
-  
+
   display: flex;
   align-self: flex-start;
   justify-content: space-between;
@@ -83,6 +83,7 @@ body {
   margin-bottom: 9px;
   font-size: 14px;
   margin-left: -4px;
+  color: rgba(255, 255, 255, 0.466);
 }
 
 /* Bio */
@@ -111,7 +112,7 @@ body {
   position: relative;
   font-size: 14px;
   margin-top: 60px;
-  margin-left: -16px;
+  margin-left: -164px;
 
 }
 
@@ -125,13 +126,13 @@ body {
   display: inline-flex;
   align-items: center;
   color: #ffff;
-  border-radius: 3px;
+  border-radius: 20px;
   margin-left: 20px;
   cursor: pointer;
-
   max-width: 100px;
   min-width: 60px;
   margin-top: 50px;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Contêiner para criar uma nova postagem */
@@ -141,7 +142,7 @@ body {
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
   border-radius: 6px;
   padding: 20px;
-  columns: #411717;
+  columns: #797979;
   min-width: 500px;
 }
 
@@ -194,7 +195,8 @@ body {
   font-size: 16px;
   margin-top: -12px;
   padding-bottom: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+  color: rgb(255, 255, 255);
 }
 
 
@@ -240,6 +242,12 @@ body {
   cursor: pointer;
 }
 
+img[src="assets/replies.png"] {
+  vertical-align: middle;
+  margin-bottom: 2px; /* Ajusta a distância específica */
+}
+
+
 .likes-count {
   width: 30px; /* Define uma largura fixa */
   text-align: left; /* Opcional: garante que o número fique alinhado */
@@ -269,7 +277,7 @@ body {
 .add-post-links a img{
   width: 20px;
   margin-right: 15px;
-  margin-top: 5px;
+  margin-top: 6px;
   cursor: pointer;
 }
 
@@ -286,8 +294,9 @@ body {
   align-items: center;
   color: #ffff;
   border-radius: 20px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   cursor: pointer;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -339,6 +348,7 @@ body {
   width: 60%;
   max-width: 500px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: rgb(85, 85, 85);
 }
 
 .close-btn {
@@ -347,16 +357,6 @@ body {
   position: absolute;
   top: 10px;
   right: 10px;
-}
-
-/* Estilos do modal */
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 60%;
-  max-width: 500px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Estilos do formulário */
@@ -470,13 +470,13 @@ body {
 
 @media (max-width: 768px) {
   .profile-details {
-    flex-direction: column;  
+    flex-direction: column;
     align-items: center;
   }
 
   .pd-right button {
-    align-self: center; 
-    width: 100%; 
+    align-self: center;
+    width: 100%;
   }
 }
 
