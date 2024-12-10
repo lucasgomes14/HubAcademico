@@ -31,19 +31,8 @@
             <button type="button" (click)="showModal()">Editar Perfil</button>
             <div class="counts">
               <p class="following"><b>20</b> Following</p>
-              <p class="followers" (click)="showFollowers()"><b>120</b> Followers</p>
+              <p class="followers"><b>120</b> Followers</p>
             </div>
-        </div>
-      </div>
-
-      <!-- Modal para exibir os seguidores -->
-      <div id="followersModal" class="modal">
-        <div class="modal-content">
-          <span class="close-btn" (click)="closeFollowersModal()">&times;</span>
-          <h2>Seguidores</h2>
-
-          <!-- Lista de seguidores será inserida dinamicamente aqui -->
-          <div id="followersList" class="followers-list"></div>
         </div>
       </div>
 
