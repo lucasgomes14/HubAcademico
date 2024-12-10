@@ -1,36 +1,41 @@
 /* Define o fundo do corpo e gerencia a rolagem */
 body {
-  background-color: #1B1837;
+  background-color: #18162b;
   overflow-x: hidden;
   overflow-y: auto;
 }
 
 /* Define o container geral do perfil */
 .profile-container {
-  padding: 20px 28.1%;
-  color: #626262;
-  max-width: 100%;
+  padding: 20px 18.1%;
+  color: #ffffff;
+  width: 100%;
+  max-width: 1500px;
 }
 
 /* Imagem de capa do perfil */
 .cover-image {
   width: 100%;
+  min-width: 500px;
   border-radius: 6px;
   margin-bottom: -55px;
 }
 
 /* Contêiner dos detalhes do perfil */
 .profile-details {
-  background: #ffff;
+  background: #1c183d;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 4px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  min-width: 500px;
 }
 
 /* Contêiner principal das informações do perfil e postagens */
 .profile-info {
+  
   display: flex;
   align-self: flex-start;
   justify-content: space-between;
@@ -50,6 +55,7 @@ body {
 
 /* Imagem do perfil */
 .profile-image {
+
   width: 120px;
   display: flex;
   border-radius: 50%;
@@ -65,9 +71,10 @@ body {
 
 /* Nome do usuário */
 .pd-row div h3 {
+  margin-left: -4px;
   font-size: 25px;
   font-weight: 600;
-  color: #1B1837;
+  color: #ffffff;
 }
 
 /* Username */
@@ -75,12 +82,13 @@ body {
   margin-top: -7px;
   margin-bottom: 9px;
   font-size: 14px;
+  margin-left: -4px;
 }
 
 /* Bio */
 .bio {
-  margin-left: 2px;
-  color: #000000;
+  margin-left: -3.8px;
+  color: #ffffff;
   font-size: 14px;
 }
 
@@ -91,16 +99,26 @@ body {
   cursor: pointer;
 }
 
-.followers, .following {
+.followers {
   margin-left: 10px;
   font-size: 14px;
   margin-top: 60px;
+  position: relative;
+  margin-right: auto;
+}
+
+.following {
+  position: relative;
+  font-size: 14px;
+  margin-top: 60px;
+  margin-left: -16px;
+
 }
 
 
 /* Botão de edição do perfil */
 .pd-right button {
-  background: #1B1837;
+  background: #241452;
   border: 0;
   outline: 0;
   padding: 6px 10px;
@@ -108,18 +126,22 @@ body {
   align-items: center;
   color: #ffff;
   border-radius: 3px;
-  margin-left: 100px;
+  margin-left: 20px;
   cursor: pointer;
+
+  max-width: 100px;
+  min-width: 60px;
   margin-top: 50px;
 }
 
 /* Contêiner para criar uma nova postagem */
 .write-post-container {
   width: 100%;
-  background: #ffff;
+  background: #1c183d;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
   border-radius: 6px;
   padding: 20px;
-  columns: #626262;
+  columns: #411717;
 }
 
 /* Contêiner do perfil do usuário na postagem */
@@ -174,20 +196,22 @@ body {
   margin-bottom: 30px;
 }
 
+
 /* Contêiner das postagens */
 .post-container {
   width: 100%;
-  background: #fff;
+  background: #1c183d;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
   border-radius: 6px;
   padding: 20px;
-  color: #626262;
+  color: #ffffff;
   margin: 15px 0;
 
 }
 
 /* Texto da postagem */
 .post-text {
-  color: #000000;
+  color: #ffffff;
   margin: 15px 0;
   font-size: 15px;
   margin-left: 55px;
@@ -253,7 +277,7 @@ body {
 }
 
 .add-post-links button {
-  background: #1B1837;
+  background: #241452;
   border: 0;
   outline: 0;
   padding: 6px 40px;
@@ -277,7 +301,7 @@ body {
 }
 
 .user-post-info p {
-  color: #1B1837;
+  color: #ffffff;
   margin-right: 4px;
   margin-bottom: 0px;
 }
@@ -443,3 +467,21 @@ body {
   user-select: none;
 }
 
+@media (max-width: 768px) {
+  .profile-details {
+    flex-direction: column;  
+    align-items: center;
+  }
+
+  .pd-right button {
+    align-self: center; 
+    width: 100%; 
+  }
+}
+
+.pd-right {
+
+  flex: 1;
+  text-align: right;
+
+}
