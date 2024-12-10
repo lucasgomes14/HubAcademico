@@ -1,4 +1,5 @@
 form {
+
   width: 100%; /* O formulário ocupa toda a largura disponível */
   display: flex;
   flex-direction: column; /* Mantém os elementos alinhados em coluna inicialmente */
@@ -6,6 +7,7 @@ form {
   margin-bottom: 22px;
   overflow: hidden;
   max-height: max-content;
+
   
 }
 
