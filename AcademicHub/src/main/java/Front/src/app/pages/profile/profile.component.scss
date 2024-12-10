@@ -1,424 +1,312 @@
 /* Define o fundo do corpo e gerencia a rolagem */
 body {
+
   background-color: #18162b;
+  color: white;
+  margin: 0;
+  padding: 0;
   overflow-x: hidden;
-  overflow-y: auto;
+
 }
 
-/* Define o container geral do perfil */
-.profile-container {
-  padding: 20px 18.1%;
-  color: #ffffff;
-  width: 100%;
-  max-width: 1500px;
+.profile-header {
+
+  max-width: 800px;
+  margin: 0px auto;
+  padding: 50 20px;
+
 }
 
-/* Imagem de capa do perfil */
 .cover-image {
+
   width: 100%;
-  min-width: 500px;
   border-radius: 6px;
-  margin-bottom: -55px;
+
 }
 
-/* Contêiner dos detalhes do perfil */
 .profile-details {
-  background: #1c183d;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+
+  max-width: 800px;
+  margin: -25px auto;
   padding: 20px;
-  border-radius: 4px;
+  background: #1c183d;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  position: relative;
+  margin-bottom: 5px;
+
+}
+
+.profile-left {
+
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
-  min-width: 500px;
+  gap: 20px;
+
 }
 
-/* Contêiner principal das informações do perfil e postagens */
-.profile-info {
+.profile-left p {
 
-  display: flex;
-  align-self: flex-start;
-  justify-content: space-between;
-  margin-top: 20px;
+  margin-top: -4px;
+  margin-bottom: 15px;
+
 }
 
-/* Coluna que contém as postagens */
-.post-col {
-  flex-basis: 100%;
+.profile-left h3 {
+
+  font-size: 20px;
+
 }
 
-/* Informações do usuário */
-.pd-row {
-  display: flex;
-  align-items: flex-start;
-}
-
-/* Imagem do perfil */
 .profile-image {
 
   width: 120px;
-  display: flex;
+  margin-top: -40px;
   border-radius: 50%;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
-  border: 5px solid white;
+  border: 4px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+
 }
 
-/* Detalhes do usuário (nome, bio, amigos) */
-.user-info {
-  margin-top: 50px;
-  margin-left: 25px;
-}
+.profile-right {
 
-/* Nome do usuário */
-.pd-row div h3 {
-  margin-left: -4px;
-  font-size: 25px;
-  font-weight: 600;
-  color: #ffffff;
-}
-
-/* Username */
-.username {
-  margin-top: -7px;
-  margin-bottom: 9px;
-  font-size: 14px;
-  margin-left: -4px;
-  color: rgba(255, 255, 255, 0.466);
-}
-
-/* Bio */
-.bio {
-  margin-left: -3.8px;
-  color: #ffffff;
-  font-size: 14px;
-}
-
-/* Organização para contagem de seguidores/seguindos*/
-.counts {
   display: flex;
-  justify-content: space-between;
+  flex-direction:column;
+  align-items: flex-end;
+  gap: 10px;
+
+}
+
+.stats {
+
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin-top: 20px;
   cursor: pointer;
+
 }
 
-.followers {
-  margin-left: 10px;
+.profile-left p, .profile-right p {
+
   font-size: 14px;
-  margin-top: 60px;
-  position: relative;
-  margin-right: auto;
-}
-
-.following {
-  position: relative;
-  font-size: 14px;
-  margin-top: 60px;
-  margin-left: -164px;
 
 }
 
+.profile-right button {
 
-/* Botão de edição do perfil */
-.pd-right button {
   background: #241452;
-  border: 0;
-  outline: 0;
-  padding: 6px 10px;
-  display: inline-flex;
-  align-items: center;
-  color: #ffff;
+  border: none;
+  padding: 8px 16px;
   border-radius: 20px;
-  margin-left: 20px;
+  color: #ffffff;
+  font-size: 14px;
   cursor: pointer;
-  max-width: 100px;
-  min-width: 60px;
-  margin-top: 50px;
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+
 }
 
-/* Contêiner para criar uma nova postagem */
-.write-post-container {
-  width: 100%;
+/* Estilos para as postagens */
+.post {
+
   background: #1c183d;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
   border-radius: 6px;
   padding: 20px;
-  columns: #797979;
-  min-width: 500px;
+  margin: 1px 0;
+  color: #fff;
+
 }
 
-/* Contêiner do perfil do usuário na postagem */
-.user-profile {
+.post-header {
+
   display: flex;
   align-items: center;
+
 }
 
-/* Imagem do perfil na postagem */
-.user-profile img {
+.post-info {
+
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  align-items: center;
+
+}
+
+.post-header img {
+
   width: 45px;
   border-radius: 50%;
   margin-right: 10px;
+
 }
 
-/* Nome e status do usuário na postagem */
-.user-profile p {
+.post-header p {
+
   font-weight: 500;
-  color: #626262;
+  color: #ffffff;
+
 }
 
-.user-profile small {
+.post-header time {
+
   font-size: 12px;
   color: rgba(255, 255, 255, 0.466);
-}
-
-.user-profile span {
-  font-size: 13px;
-  color: #9a9a9a;
-}
-
-/* Área de texto para a postagem */
-.post-input-container {
-  padding-left: 55px;
-  padding-top: 20px;
-  position: relative;
-}
-
-/* Campo de texto */
-.post-input-container textarea {
-  width: 100%;
-  border: 0;
-  outline: 0;
-  border-bottom: 1px solid #ccc;
-  background: transparent;
-  resize: none;
-  overflow: hidden;
-  min-height: 35px;
-  max-height: 200px;
-  font-size: 16px;
-  margin-top: -12px;
-  padding-bottom: 10px;
-  margin-bottom: 40px;
-  color: rgb(255, 255, 255);
-}
-
-
-/* Contêiner das postagens */
-.post-container {
-  width: 100%;
-  background: #1c183d;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
-  border-radius: 6px;
-  padding: 20px;
-  color: #ffffff;
-  margin: 15px 0;
 
 }
 
-/* Texto da postagem */
 .post-text {
-  color: #ffffff;
-  margin: 15px 0;
+
   font-size: 15px;
-  margin-left: 55px;
-  margin-top: 0px;
-  margin-bottom: 20px;
+  margin: 0px 0 20px 55px;
+
 }
 
-/* Organização de ícones na parte inferior da postagem */
-.post-row {
+.post-footer {
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+
+}
+
+
+.post-footer span {
+
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-}
-
-.activity-icons div img {
-  width: 18px;
-  margin-right: 10px;
-}
-
-.activity-icons div {
-  display: inline-flex;
-  align-items: center;
-  margin-right: 20px;
   font-size: 13px;
-  cursor: pointer;
+  margin-right: 10px;
+  line-height: 1.1;
+
 }
 
-img[src="assets/replies.png"] {
+.post-footer span:last-child img {
+
+  transform: translateY(0px);
+
+}
+
+.post-footer img {
+
+  width: 18px;
   vertical-align: middle;
-  margin-bottom: 2px; /* Ajusta a distância específica */
-}
-
-
-.likes-count {
-  width: 30px; /* Define uma largura fixa */
-  text-align: left; /* Opcional: garante que o número fique alinhado */
-}
-
-.like-button {
-  display: inline-flex;
-  align-items: center;
+  margin-right: 8px;
   cursor: pointer;
+  transform: translateY(1px);
+
 }
 
-.like-button:hover {
-  cursor: pointer;
+/* Estilos adicionais */
+.profile-info {
+
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+
 }
 
-/* Links de anexos abaixo da postagem */
-.add-post-links {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
-  position: absolute;
-  bottom: -16px;
-  right: 0px;
+.posts {
+
+  padding: 0;
+  margin: 0;
+
 }
 
-/* Ícones de anexos */
-.add-post-links a img{
-  width: 20px;
-  margin-right: 15px;
-  margin-top: 6px;
-  cursor: pointer;
+.posts .post {
+
+  margin: 15px 0;
+
 }
 
-.add-post-links a img:hover {
-  cursor: pointer;
-}
-
-.add-post-links button {
-  background: #241452;
-  border: 0;
-  outline: 0;
-  padding: 6px 40px;
-  display: inline-flex;
-  align-items: center;
-  color: #ffff;
-  border-radius: 20px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.5);
-}
-
-
-.add-post-links button:hover {
-  cursor: pointer;
-}
-
-
-.user-post-info {
-  display: flex;
-  justify-content: space-between;
-}
-
-.user-post-info p {
-  color: #ffffff;
-  margin-right: 4px;
-  margin-bottom: 0px;
-}
-
-.user-post-info small {
-  margin-top: 1px;
-  font-size: 14px;
-}
-
-.user-post-info span {
-  margin-top: 2px;
-  margin-left: 2.5px;
-}
-
-/* Modal inicialmente oculto */
+/* Modal oculto */
 .modal {
-  display: none; /* Inicialmente oculto */
+
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
   z-index: 1000;
+
 }
 
 /* Conteúdo do modal */
 .modal-content {
-  background-color: white;
+
+  background: white;
   padding: 20px;
   border-radius: 8px;
-  width: 60%;
   max-width: 500px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   color: rgb(85, 85, 85);
+  width: 60%;
+
 }
 
+/* Botão de fechar */
 .close-btn {
+
   font-size: 24px;
   cursor: pointer;
   position: absolute;
   top: 10px;
   right: 10px;
+  background: transparent;
+  border: 0;
+  color: white;
+
 }
 
-/* Estilos do formulário */
-.form-group {
-  margin-bottom: 15px;
-}
+input, textarea {
 
-.form-group label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.form-group input,
-.form-group textarea {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+
 }
 
-.form-group textarea {
-  resize: vertical;
-  min-height: 80px;
+textarea {
+
   resize: none;
+  min-height: 80px;
+
 }
 
-/* Estilos para o botão de enviar */
-.form-actions {
-  display: flex;
-  justify-content: flex-end;
-}
+/* Botão de salvar */
+button[type="submit"] {
 
-.form-actions button {
   background-color: #1B1837;
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
+  margin-left: 300px;
+
 }
 
-.form-actions button:hover {
+button[type="submit"]:hover {
+
   background-color: #333;
-}
-
-@media (max-width: 768px) {
-  .profile-details {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .pd-right button {
-    align-self: center;
-    width: 100%;
-  }
-}
-
-.pd-right {
-
-  flex: 1;
-  text-align: right;
 
 }
+
+/* Estilos do formulário */
+form > * {
+
+  margin-bottom: 15px;
+
+}
+
+
