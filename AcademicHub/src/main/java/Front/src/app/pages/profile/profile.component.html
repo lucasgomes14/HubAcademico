@@ -6,136 +6,84 @@
   <title>Profile</title>
 </head>
 <body>
-    <!-- Container principal -->
-    <div class="profile-container">
-      <!-- Imagem de capa -->
-      <img src="assets/profile-cover.jpg" class="cover-image">
-      <!-- Detalhes do perfil -->
-      <div class="profile-details">
-        <div class="pd-left">
-          <div class="pd-row">
-            <!-- Imagem do perfil -->
-            <img src="assets/profile-image.png" class="profile-image"/>
-            <!-- Informações do usuário -->
-            <div class="user-info">
-              <h3>Robertin</h3>
-              <p class="username">&#64;robertin22</p>
-              <p class="bio">fi de bandido e pilantra</p>
-            </div>
-          </div>
-        </div>
+  <header class="profile-header">
+    <img src="assets/profile-cover.jpg" alt="Profile Cover" class="cover-image">
+  </header>
 
-        <!-- Lado direito: botão e estatísticas -->
-        <div class="pd-right">
-            <!-- Botão de edição do perfil -->
-            <button type="button" (click)="showModal()">Editar Perfil</button>
-            <div class="counts">
-              <p class="following"><b>20</b> Following</p>
-              <p class="followers"><b>120</b> Followers</p>
-            </div>
-        </div>
+
+  <section class="profile-details">
+    <aside class="profile-left">
+      <img src="assets/profile-image.png" alt="Profile Image" class="profile-image">
+      <div class="user-info">
+        <h3>Robertin</h3>
+        <p class="username" style="color: gray;">&#64;robertin22</p>
+        <p class="bio">fi de bandido e pilantra</p>
       </div>
+    </aside>
 
-      <!-- Modal para editar perfil -->
-      <div id="editModal" class="modal">
-        <div class="modal-content">
-          <span class="close-btn" (click)="closeModal()">&times;</span>
-          <h2>Editar Perfil</h2>
-
-          <!-- Formulário de edição -->
-          <form id="editProfileForm" onsubmit="submitForm(event)">
-            <div class="form-group">
-              <label for="name">Nome</label>
-              <input type="text" id="name" placeholder="Digite seu nome" required />
-            </div>
-
-            <div class="form-group">
-              <label for="username">Username</label>
-              <input type="text" id="username" placeholder="Digite seu username" required />
-            </div>
-
-            <div class="form-group">
-              <label for="bio">Bio</label>
-              <textarea id="bio" placeholder="Digite uma breve descrição sobre você" required></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="profileImage">Imagem de Perfil</label>
-              <input type="file" id="profileImage" onchange="onImageChange(event)" />
-            </div>
-
-            <div class="form-actions">
-              <button type="submit">Salvar Alterações</button>
-            </div>
-          </form>
-        </div>
+    <aside class="profile-right">
+      <button type="button" (click)="showModal()">Editar Perfil</button>
+      <div class="stats">
+        <p><b>20</b> Following</p>
+        <p><b>120</b> Followers</p>
       </div>
+    </aside>
+  </section>
 
-      <!-- Informações gerais e colunas -->
-      <div class="profile-info">
-        <!-- Coluna de posts -->
-        <div class="post-col">
-          <!-- Caixa de escrever post -->
-          <div class="write-post-container">
-            <div class="user-profile">
-              <img src="assets/profile-image.png">
-              <div class="user-post-info">
-                  <p>Robertin</p>
-                  <small>&#64;robertin22</small>
-              </div>
-            </div>
+  <section id="editModal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" (click)="closeModal()">&times;</button>
+      <h2>Editar Perfil</h2>
+      <form id="editProfileForm" onsubmit="submitForm(event)">
+        <label for="name">Nome</label>
+        <input type="text" id="name" placeholder="Digite seu nome" required>
 
-            <!-- Campo de texto e links de anexos -->
-            <div class="post-input-container">
-              <textarea placeholder="What's on your mind, Robertin?" maxlength="200" (input)="autoResize($event)"></textarea>
-              <div class="add-post-links">
-                <a href="#" (click)="triggerFileInput($event)"><img src="assets/content.png"></a>
-                <button>Post</button>
-              </div>
-              <!-- Input para seleção de arquivo de imagem -->
-              <input type="file" id="fileInput" style="display: none;" (change)="handleFileChange($event)" accept="image/*">
-            </div>
-          </div>
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Digite seu username" required>
 
-          <!-- Primeira postagem -->
-          <div class="post-container">
-            <div class="user-profile">
-              <img src="assets/profile-image.png">
-              <div class="user-post-info">
-                <p>Robertin</p>
-                <span>Dez 7 - 04:30 pm</span>
-              </div>
-            </div>
-            <p class="post-text">O caba tentando dormir e o gato abrindo as panela, é foda...</p>
+        <label for="bio">Bio</label>
+        <textarea id="bio" placeholder="Digite uma breve descrição sobre você" required></textarea>
 
-            <div class="post-row">
-              <div class="activity-icons">
-                <div><img src="assets/likes.png">120</div>
-                <div class="replies"><img src="assets/replies.png">2</div>
-              </div>
-            </div>
-          </div>
+        <label for="profileImage">Imagem de Perfil</label>
+        <input type="file" id="profileImage" onchange="onImageChange(event)">
 
-          <!-- Segunda postagem -->
-          <div class="post-container">
-            <div class="user-profile">
-              <img src="assets/profile-image.png">
-              <div class="user-post-info">
-                <p>Robertin</p>
-                <span>Dez 7 - 03:35 pm</span>
-              </div>
-            </div>
-            <p class="post-text">Mermão, que sono é esse...</p>
-
-            <div class="post-row">
-              <div class="activity-icons">
-                <div><img src="assets/likes.png">120</div>
-                <div><img src="assets/replies.png">2</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        <button type="submit">Salvar Alterações</button>
+      </form>
     </div>
+  </section>
+
+  <main class="profile-info">
+    <section class="posts">
+      <article class="post">
+        <header class="post-header">
+          <img src="assets/profile-image.png" alt="Profile Image">
+          <div class="post-info">
+            <p>Robertin</p>
+            <time datetime="2024-12-07T16:30">Dez 7 - 04:30 pm</time>
+          </div>
+        </header>
+        <p class="post-text">O caba tentando dormir e o gato abrindo as panela, é foda...</p>
+        <footer class="post-footer">
+          <span><img src="assets/likes.png" alt="Likes">120</span>
+          <span><img src="assets/replies.png" alt="Replies">2</span>
+        </footer>
+      </article>
+
+      <article class="post">
+        <header class="post-header">
+          <img src="assets/profile-image.png" alt="Profile Image">
+          <div class="post-info">
+            <p>Robertin</p>
+            <time datetime="2024-12-07T15:35">Dez 7 - 03:35 pm</time>
+          </div>
+        </header>
+        <p class="post-text">Mermão, que sono é esse...</p>
+        <footer class="post-footer">
+          <span><img src="assets/likes.png" alt="Likes">120</span>
+          <span><img src="assets/replies.png" alt="Replies">2</span>
+        </footer>
+      </article>
+    </section>
+  </main>
 </body>
 </html>
