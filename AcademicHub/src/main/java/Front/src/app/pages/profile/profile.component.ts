@@ -8,16 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent {
-  autoResize(event: Event): void {
-    const textarea = event.target as HTMLTextAreaElement;
-    textarea.style.height = 'auto';
-    const newHeight = textarea.scrollHeight;
-    textarea.style.height = newHeight + 'px';
-
-    // Adicionando um log para verificar o valor da altura
-    console.log('Nova altura:', newHeight)
-  }
-
   showModal() {
     const modal = document.getElementById("editModal");
     if (modal) {
