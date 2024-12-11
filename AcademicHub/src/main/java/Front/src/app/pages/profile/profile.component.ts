@@ -1,12 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import {UserProfileService} from '../../services/user-profile.service';
 
 @Component({
   selector: 'app-profile',
-  imports: [],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss'
+  styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
+
+  userProfile: any = null; // Variável para armazenar os dados do perfil
+  username: string = '';    // Variável para armazenar o username da URL
+
+  constructor(
+    private route: ActivatedRoute, // Para acessar os parâmetros da URL
+    private userProfileService: UserProfileService // Serviço para buscar o perfil
+  ) { }
+
+  ngOnInit(): void {
+    // Obtém o username da URL
+    this.username = this.route.snapshot.paramMap.get('username') || '';
+
+    // Verifica se o username está presente
+    if (this.username) {
+      this.userProfileService.getUserProfile(this.username).subscribe({
+        next: (data) => {
+          this.userProfile = data; // Preenche os dados do perfil
+        },
+        error: (err) => {
+          console.error('Erro ao carregar o perfil', err);
+        }
+      });
+    }
+  }
+
   showModal() {
     const modal = document.getElementById("editModal");
     if (modal) {
@@ -19,7 +46,6 @@ export class ProfileComponent {
     }
   }
 
-  // Função para fechar o modal
   closeModal() {
     const modal = document.getElementById("editModal");
     if (modal) {
@@ -27,8 +53,7 @@ export class ProfileComponent {
     }
   }
 
-   // Função para disparar o clique no input de arquivo
-   triggerFileInput(event: Event): void {
+  triggerFileInput(event: Event): void {
     event.preventDefault();
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
     if (fileInput) {
@@ -36,7 +61,6 @@ export class ProfileComponent {
     }
   }
 
-  // Função para tratar a mudança de arquivo (quando o usuário escolhe uma imagem)
   handleFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];

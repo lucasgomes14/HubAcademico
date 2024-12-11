@@ -15,16 +15,16 @@
     <aside class="profile-left">
       <img src="assets/profile-image.png" alt="Profile Image" class="profile-image">
       <div class="user-info">
-        <h3>Robertin</h3>
-        <p class="username" style="color: gray;">&#64;robertin22</p>
-        <p class="bio">fi de bandido e pilantra</p>
+        <h3>{{ userProfile?.name || "Robertin" }}</h3>
+        <p class="username" style="color: gray;">&#64;{{ userProfile?.username || "robertin22" }}</p>
+        <p class="bio">fi de bandido e pilantra</p> <!-- adicionar bio para o usuário na entidade -->
       </div>
     </aside>
 
     <aside class="profile-right">
       <button type="button" (click)="showModal()">Editar Perfil</button>
       <div class="stats">
-        <p><b>20</b> Following</p>
+        <p><b>20</b> Following</p>   <!-- criar essas variaveis no back -->
         <p><b>120</b> Followers</p>
       </div>
     </aside>
@@ -57,14 +57,14 @@
         <header class="post-header">
           <img src="assets/profile-image.png" alt="Profile Image">
           <div class="post-info">
-            <p>Robertin</p>
-            <time datetime="2024-12-07T16:30">Dez 7 - 04:30 pm</time>
+            <p>{{ userProfile?.name || "Robertin" }}</p>
+            <time datetime="2024-12-07T16:30">{{ userProfile?.posts.dateAndTimeOfPublication || "Dez 7 - 04:30 pm" }}</time>
           </div>
         </header>
-        <p class="post-text">O caba tentando dormir e o gato abrindo as panela, é foda...</p>
+        <p class="post-text">{{ userProfile?.posts.description || "O caba tentando dormir e o gato abrindo as panela, é foda..." }}</p>
         <footer class="post-footer">
-          <span><img src="assets/likes.png" alt="Likes">120</span>
-          <span><img src="assets/replies.png" alt="Replies">2</span>
+          <span><img src="assets/likes.png" alt="Likes">{{ userProfile?.posts.likes || "120" }}</span>
+          <span><img src="assets/replies.png" alt="Replies">{{ userProfile?.posts.quantityComments || "2" }}</span>
         </footer>
       </article>
 
