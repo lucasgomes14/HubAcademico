@@ -13,11 +13,11 @@
 
   <section class="profile-details">
     <aside class="profile-left">
-      <img src="assets/profile-image.png" alt="Profile Image" class="profile-image">
+      <img [src]="getProfilePicture()" alt="Profile Image" class="profile-image">
       <div class="user-info">
-        <h3>{{ userProfile?.name || "Robertin" }}</h3>
-        <p class="username" style="color: gray;">&#64;{{ userProfile?.username || "robertin22" }}</p>
-        <p class="bio">fi de bandido e pilantra</p> <!-- adicionar bio para o usuário na entidade -->
+        <h3>{{ userProfile?.name || "Default" }}</h3>
+        <p class="username" style="color: gray;">&#64;{{ userProfile?.username || "Default" }}</p>
+        <p class="bio">{{ userProfile?.bio || "Default" }}</p>
       </div>
     </aside>
 

@@ -34,6 +34,12 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  getProfilePicture(): string {
+    return this.userProfile?.profilePicture
+      ? `data:image/jpeg;base64,${this.userProfile.profilePicture}`
+      : 'assets/default-profile.png'; // Imagem padrão caso não tenha
+  }
+
   showModal() {
     const modal = document.getElementById("editModal");
     if (modal) {

@@ -9,5 +9,5 @@ import java.util.List;
 
 public record UserProfileResponseDTO(String name, String lastName, String username, String bio,
                                      LocalDateTime dateAndTimeOfUserCreation, LocalDateTime userUpdateDateAndTime,
-                                     String email, UserRole role, Course course, byte[] profilePicture, List<Post> posts) {
+                                     String email, UserRole role, Course course, String profilePicture, List<Post> posts) {
 }
