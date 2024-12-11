@@ -18,8 +18,6 @@ export class DashboardComponent implements OnInit {
     { name: 'Profile', icon: 'assets/do-utilizador (1).png' }
   ];
 
-
-
   constructor() { }
 
   ngOnInit(): void {

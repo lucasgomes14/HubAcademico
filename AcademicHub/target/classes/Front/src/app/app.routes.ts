@@ -3,6 +3,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { SavedComponent } from './pages/saved/saved.component';
+import { NotificationComponent } from './pages/notification/notification.component';
+import { SearchComponent } from './pages/search/search.component';
 
 export const routes: Routes = [
     //criando rota de login
@@ -20,12 +23,24 @@ export const routes: Routes = [
         component: SignupComponent
     },
     {
-        path: "dashboard",
+        path: "dashboard", //home
         component: DashboardComponent
     },
     {
-        path: "profile",
-        component: ProfileComponent
+      path: "search",
+      component: SearchComponent
+    },
+    {
+      path: "notifications",
+      component: NotificationComponent
+    },
+    {
+        path: "saved",
+        component: SavedComponent
+    },
+    {
+      path: "profile",
+      component: ProfileComponent
     },
     {
         path: "**",

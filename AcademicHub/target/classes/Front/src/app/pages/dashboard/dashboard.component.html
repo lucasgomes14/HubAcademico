@@ -1,35 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+</head>
+
 <body>
-  <div>
-    <div class="barra">
-      <img src="assets/LogoHub.png" alt="">
-      <p>Hub Acadêmico</p>
+    <div class="sidebar">
+      <header class="barra">
+        <img src="assets/LogoHub.png" alt="Logo Hub Acadêmico">
+      </header>
+      <!-- Nome do Hub -->
+      <p class="nome_hub">Hub Acadêmico</p>
+      <div>
+      <!-- Menu lateral -->
+        <nav class="barra1">
+          <div class="item">
+            <img src="assets/casa (1).png" alt="casa">
+            <p>Home</p>
+          </div>
+          <div class="item">
+            <img src="assets/procurar (1).png" alt="lupa">
+            <p>Search</p>
+          </div>
+          <div class="item">
+            <img src="assets/sino (1).png" alt="sino">
+            <p>Notifications</p>
+          </div>
+          <div class="item">
+            <img src="assets/marca-paginas (1).png" alt="marca-paginas">
+            <p>Saved Posts</p>
+          </div>
+          <div class="item">
+            <img src="assets/do-utilizador (1).png" alt="do-utilizador">
+            <p>Profile</p>
+          </div>
+        </nav>
+      </div>
     </div>
-    <div class="barra1">
-      <div class="item">
-        <img src="assets/casa (1).png" alt="casa">
-        <p>Home</p>
-      </div>
-      <div class="item">
-        <img src="assets/procurar (1).png" alt="lupa">
-        <p>Search</p>
-      </div>
-      <div class="item">
-        <img src="assets/sino (1).png" alt="sino">
-        <p>Notifications</p>
-      </div>
-        <div class="item">
-          <img src="assets/marca-paginas (1).png" alt="marca-paginas">
-          <p>Saved Posts</p>
+    <!-- Caixa de texto para postagem -->
+    <textarea placeholder="     O que você está pensando?" class="texto-caixa"></textarea>
+
+      <div class="post-container">
+        <!-- Informações do usuário -->
+        <div class="user-profile">
+          <img src="assets/profile-image.png" alt="User Profile" class="profile-image">
+          <div class="user-info">
+            <p class="username">Robertin</p>
+            <small class="post-time">2h atrás</small>
+          </div>
         </div>
-      <div class="item">
-        <img src="assets/do-utilizador (1).png" alt="do-utilizador">
-        <p>Profile</p>
+
+        <!-- Texto da postagem -->
+        <p class="post-text">a galinha de dona cleide </p>
+
+        <!-- Ícones de curtidas e comentários -->
+        <div class="post-row">
+          <div class="icons">
+            <div class="icon-item">
+              <img src="assets/likes.png" alt="Like">
+              <span>14</span>
+            </div>
+            <div class="icon-item">
+              <img src="assets/replies.png" alt="Comment">
+              <span>2</span>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div>
-    <textarea placeholder="     O que você está pensando?" class="texto-caixa" id=""></textarea>
-    <h2></h2>
-  </div>
-  <div class="quadrado"></div>
+
+      <div class="post-container">
+        <!-- Informações do usuário -->
+        <div class="user-profile">
+          <img src="assets/profile-image.png" alt="User Profile" class="profile-image">
+          <div class="user-info">
+            <p class="username">Robertin</p>
+            <small class="post-time">2h atrás</small>
+          </div>
+        </div>
+
+        <!-- Texto da postagem -->
+        <p class="post-text">a galinha de dona cleide </p>
+
+        <!-- Ícones de curtidas e comentários -->
+        <div class="post-row">
+          <div class="icons">
+            <div class="icon-item">
+              <img src="assets/likes.png" alt="Like">
+              <span>14</span>
+            </div>
+            <div class="icon-item">
+              <img src="assets/replies.png" alt="Comment">
+              <span>2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="post-container">
+        <!-- Informações do usuário -->
+        <div class="user-profile">
+          <img src="assets/profile2.png" alt="User Profile" class="profile-image">
+          <div class="user-info">
+            <p class="username">jotave</p>
+            <small class="post-time">1h atrás</small>
+          </div>
+        </div>
+
+        <!-- Texto da postagem -->
+        <p class="post-text">nem te conto o cume da tua mae</p>
+
+        <!-- Ícones de curtidas e comentários -->
+        <div class="post-row">
+          <div class="icons">
+            <div class="icon-item">
+              <img src="assets/likes.png" alt="Like">
+              <span>21</span>
+            </div>
+            <div class="icon-item">
+              <img src="assets/replies.png" alt="Comment">
+              <span>1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="post-container">
+        <!-- Informações do usuário -->
+        <div class="user-profile">
+          <img src="assets/eu.jpg" alt="User Profile" class="profile-image">
+          <div class="user-info">
+            <p class="username">jotave</p>
+            <small class="post-time">1h atrás</small>
+          </div>
+        </div>
+
+        <!-- Texto da postagem -->
+        <p class="post-text">paz do senhor</p>
+
+        <!-- Ícones de curtidas e comentários -->
+        <div class="post-row">
+          <div class="icons">
+            <div class="icon-item">
+              <img src="assets/likes.png" alt="Like">
+              <span>5001</span>
+            </div>
+            <div class="icon-item">
+              <img src="assets/replies.png" alt="Comment">
+              <span>1245</span>
+            </div>
+          </div>
+        </div>
+      </div>
 </body>
+</html>
