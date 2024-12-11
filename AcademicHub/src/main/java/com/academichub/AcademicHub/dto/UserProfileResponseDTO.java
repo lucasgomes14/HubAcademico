@@ -7,7 +7,7 @@ import com.academichub.AcademicHub.model.user.UserRole;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record UserProfileResponseDTO(String name, String lastName, String username,
+public record UserProfileResponseDTO(String name, String lastName, String username, String bio,
                                      LocalDateTime dateAndTimeOfUserCreation, LocalDateTime userUpdateDateAndTime,
-                                     String email, UserRole role, Course course, List<Post> posts) {
+                                     String email, UserRole role, Course course, byte[] profilePicture, List<Post> posts) {
 }

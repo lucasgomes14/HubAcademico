@@ -22,8 +22,8 @@ public class UserProfileService {
         User user = userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
 
         return new UserProfileResponseDTO(user.getName(), user.getLastName(),
-                user.getUsername(), user.getDateAndTimeOfUserCreation(), user.getUserUpdateDateAndTime(),
-                user.getEmail(), user.getRole(), user.getCourse(), user.getPosts());
+                user.getUsername(), user.getBio(), user.getDateAndTimeOfUserCreation(), user.getUserUpdateDateAndTime(),
+                user.getEmail(), user.getRole(), user.getCourse(), user.getProfilePicture(), user.getPosts());
     }
 
     private void validateUsername(String username) {

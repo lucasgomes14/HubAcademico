@@ -32,6 +32,9 @@ public class Post {
     @Column(name = "publication_update_date_and_time")
     private LocalDateTime publicationUpdateDateAndTime;
 
+    @Column(name = "likes")
+    private Integer likes;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

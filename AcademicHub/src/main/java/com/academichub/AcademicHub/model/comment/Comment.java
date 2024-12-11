@@ -21,8 +21,8 @@ public class Comment {
     @Column(name = "text", nullable = false)
     private String text;
 
-    @Column(name = "likes", nullable = false)
-    private Integer likes;
+    @Column(name = "number_of_comments")
+    private Integer numberOfComments;
 
     @Column(name = "date_and_time_of_publication", nullable = false)
     private LocalDateTime dateAndTimeOfPublication;

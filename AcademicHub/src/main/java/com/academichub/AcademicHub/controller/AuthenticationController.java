@@ -28,7 +28,7 @@ public class AuthenticationController {
     /* a entrada vai ser um json que vai ser validado e o paramentro está
        em model/user/RegisterDTO coloquei assim para ficar mais organizado e limpo*/
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Validated RegisterDTO body) {
+    public ResponseEntity<?> register(@RequestBody @Validated RegisterDTO body) {
 
         User user = userService.cadasterUser(body);
 

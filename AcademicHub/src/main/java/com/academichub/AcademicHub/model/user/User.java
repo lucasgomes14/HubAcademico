@@ -34,6 +34,9 @@ public class User {
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
+    @Column(name = "bio")
+    private String bio;
+
     @Column(name = "date_and_time_of_user_creation", nullable = false)
     private LocalDateTime dateAndTimeOfUserCreation;
 
@@ -53,6 +56,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "course", nullable = false)
     private Course course;
+
+    @Column(name = "profile_picture")
+    private byte[] profilePicture;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
