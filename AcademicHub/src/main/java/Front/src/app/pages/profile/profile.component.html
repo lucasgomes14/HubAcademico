@@ -15,9 +15,9 @@
     <aside class="profile-left">
       <img [src]="getProfilePicture()" alt="Profile Image" class="profile-image">
       <div class="user-info">
-        <h3>{{ userProfile?.name || "Default" }}</h3>
-        <p class="username" style="color: gray;">&#64;{{ userProfile?.username || "Default" }}</p>
-        <p class="bio">{{ userProfile?.bio || "Default" }}</p>
+        <h3>{{ userProfile.name || "" }}</h3>
+        <p class="username" style="color: gray;">&#64;{{ userProfile.username || ""}}</p>
+        <p class="bio">{{ userProfile.bio || "" }}</p>
       </div>
     </aside>
 
@@ -53,33 +53,18 @@
 
   <main class="profile-info">
     <section class="posts">
-      <article class="post">
+      <article class="post" *ngFor="let post of userProfile?.posts">
         <header class="post-header">
-          <img src="assets/profile-image.png" alt="Profile Image">
+          <img [src]="getProfilePicture()" alt="Profile Image">
           <div class="post-info">
-            <p>{{ userProfile?.name || "Robertin" }}</p>
-            <time datetime="2024-12-07T16:30">{{ userProfile?.posts.dateAndTimeOfPublication || "Dez 7 - 04:30 pm" }}</time>
+            <p>{{ userProfile.name || "" }}</p>
+            <time [attr.datetime]="post.dateAndTimeOfPublication"> {{ post.dateAndTimeOfPublication | date:'short'}} </time>
           </div>
         </header>
-        <p class="post-text">{{ userProfile?.posts.description || "O caba tentando dormir e o gato abrindo as panela, é foda..." }}</p>
+        <p class="post-text">{{ post.description || "" }}</p>
         <footer class="post-footer">
-          <span><img src="assets/likes.png" alt="Likes">{{ userProfile?.posts.likes || "120" }}</span>
-          <span><img src="assets/replies.png" alt="Replies">{{ userProfile?.posts.quantityComments || "2" }}</span>
-        </footer>
-      </article>
-
-      <article class="post">
-        <header class="post-header">
-          <img src="assets/profile-image.png" alt="Profile Image">
-          <div class="post-info">
-            <p>Robertin</p>
-            <time datetime="2024-12-07T15:35">Dez 7 - 03:35 pm</time>
-          </div>
-        </header>
-        <p class="post-text">Mermão, que sono é esse...</p>
-        <footer class="post-footer">
-          <span><img src="assets/likes.png" alt="Likes">120</span>
-          <span><img src="assets/replies.png" alt="Replies">2</span>
+          <span><img src="assets/likes.png" alt="Likes">{{ post.likes || "0" }}</span>
+          <span><img src="assets/replies.png" alt="Replies">{{ post.comments.length || "0" }}</span>
         </footer>
       </article>
     </section>

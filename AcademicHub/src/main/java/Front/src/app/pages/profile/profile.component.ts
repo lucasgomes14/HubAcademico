@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {UserProfileService} from '../../services/user-profile.service';
+import {DatePipe, NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
+  imports: [
+    NgForOf,
+    DatePipe
+  ],
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {

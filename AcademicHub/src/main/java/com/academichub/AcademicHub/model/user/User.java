@@ -10,11 +10,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/* implementa o userDetails que é uma classe do spring security,
-    que é usada para identificar uma classe que represente um usuário
-    que será autenticado na aplicação
-*/
-
 @Getter
 @Setter
 @Entity
