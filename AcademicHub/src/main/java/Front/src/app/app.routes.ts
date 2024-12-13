@@ -24,7 +24,7 @@ export const routes: Routes = [
         component: DashboardComponent
     },
     {
-        path: "profile",
+        path: "profile/:username",
         component: ProfileComponent
     },
     {

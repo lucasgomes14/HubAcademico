@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable, tap} from 'rxjs';
 
 export interface UserProfile {
   name: string;
@@ -22,11 +22,15 @@ export interface UserProfile {
 
 export class UserProfileService {
 
-  private apiUrl = 'http://localhost:8080/profile';
+  private apiUrl = 'http://localhost:8081/profile';
 
   constructor(private http: HttpClient) { }
 
   getUserProfile(username: string): Observable<UserProfile> {
-    return this.http.get<UserProfile>(`${this.apiUrl}/${username}`);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${sessionStorage.getItem('auth-token')}`
+    });
+
+    return this.http.get<UserProfile>(`${this.apiUrl}/${username}`, { headers });
   }
 }

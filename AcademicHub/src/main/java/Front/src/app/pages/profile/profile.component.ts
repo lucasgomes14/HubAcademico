@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {UserProfileService} from '../../services/user-profile.service';
 import {DatePipe, NgForOf} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   imports: [
     NgForOf,
-    DatePipe
+    DatePipe,
+    FormsModule,
+    ReactiveFormsModule
   ],
   styleUrls: ['./profile.component.scss']
 })
@@ -20,7 +23,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private route: ActivatedRoute, // Para acessar os parâmetros da URL
     private userProfileService: UserProfileService // Serviço para buscar o perfil
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     // Obtém o username da URL
@@ -42,7 +46,7 @@ export class ProfileComponent implements OnInit {
   getProfilePicture(): string {
     return this.userProfile?.profilePicture
       ? `data:image/jpeg;base64,${this.userProfile.profilePicture}`
-      : 'assets/default-profile.png'; // Imagem padrão caso não tenha
+      : 'assets/profile-image.png'; // Imagem padrão caso não tenha
   }
 
   showModal() {

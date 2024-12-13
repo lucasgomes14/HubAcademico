@@ -23,7 +23,8 @@ public class UserProfileService {
 
         return new UserProfileResponseDTO(user.getName(), user.getLastName(),
                 user.getUsername(), user.getBio(), user.getDateAndTimeOfUserCreation(), user.getUserUpdateDateAndTime(),
-                user.getEmail(), user.getRole(), user.getCourse(), user.getProfilePicture(), user.getPosts());
+                user.getEmail(), user.getRole(), user.getCourse(), user.getProfilePicture(), user.getPosts(),
+                user.getFollowing().size(), user.getFollowers().size());
     }
 
     private void validateUsername(String username) {
