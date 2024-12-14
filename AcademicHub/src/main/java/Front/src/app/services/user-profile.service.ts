@@ -33,4 +33,13 @@ export class UserProfileService {
 
     return this.http.get<UserProfile>(`${this.apiUrl}/${username}`, { headers });
   }
+
+  updateUserProfile(username: string, updateUserProfileDTO: any) {
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${sessionStorage.getItem('auth-token')}`
+    });
+
+    return this.http.put<any>(`${this.apiUrl}/${username}`, updateUserProfileDTO, { headers });
+  }
 }

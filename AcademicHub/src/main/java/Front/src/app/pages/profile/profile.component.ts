@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserProfileService} from '../../services/user-profile.service';
-import {DatePipe, NgForOf} from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {DatePipe, NgForOf, NgIf} from '@angular/common';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +11,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     NgForOf,
     DatePipe,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   styleUrls: ['./profile.component.scss']
 })
@@ -19,28 +20,54 @@ export class ProfileComponent implements OnInit {
 
   userProfile: any = null; // Variável para armazenar os dados do perfil
   username: string = '';    // Variável para armazenar o username da URL
+  isOwner: boolean = false;
+  editProfileForm : FormGroup;
 
   constructor(
     private route: ActivatedRoute, // Para acessar os parâmetros da URL
-    private userProfileService: UserProfileService // Serviço para buscar o perfil
+    private userProfileService: UserProfileService, // Serviço para buscar o perfil
+    private fb: FormBuilder,
+    private router: Router
   ) {
+    this.editProfileForm = this.fb.group({
+      name: ['', Validators.required],
+      username: ['', Validators.required],
+      bio: [''],
+      profilePicture: ['']
+    });
   }
 
   ngOnInit(): void {
     // Obtém o username da URL
     this.username = this.route.snapshot.paramMap.get('username') || '';
 
+    if (!this.username) {
+      this.router.navigate(['/dashboard']);  // Redireciona para o dashboard
+      return;
+    }
+
     // Verifica se o username está presente
     if (this.username) {
       this.userProfileService.getUserProfile(this.username).subscribe({
         next: (data) => {
           this.userProfile = data; // Preenche os dados do perfil
+
+          this.isOwner = sessionStorage.getItem("username") === this.username;
+
+          this.editProfileForm.patchValue({
+            name: this.userProfile.name,
+            username: this.userProfile.username,
+            bio: this.userProfile.bio,
+            profilePicture: this.userProfile.profilePicture
+          });
         },
         error: (err) => {
           console.error('Erro ao carregar o perfil', err);
+          this.router.navigate(['/dashboard'])
         }
       });
     }
+
   }
 
   getProfilePicture(): string {
@@ -68,31 +95,37 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  triggerFileInput(event: Event): void {
-    event.preventDefault();
-    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-    if (fileInput) {
-      fileInput.click(); // Simula um clique no input de arquivo
+  onImageChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.editProfileForm.patchValue({
+        profilePicture: file
+      });
     }
   }
 
-  handleFileChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    const file = input.files?.[0];
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const imageUrl = reader.result as string;
-        console.log('Imagem selecionada:', imageUrl);
-
-        // Exibindo a imagem no perfil
-        const profileImage = document.getElementById('profile-image') as HTMLImageElement;
-        if (profileImage) {
-          profileImage.src = imageUrl; // Atualiza a imagem no perfil
-        }
+  onSubmit() {
+    if (this.editProfileForm.valid) {
+      const updateUserProfileDTO = {
+        name: this.editProfileForm.value.name,
+        username: this.editProfileForm.value.username,
+        bio: this.editProfileForm.value.bio,
+        profilePicture: this.editProfileForm.value.profilePicture
       };
-      reader.readAsDataURL(file);
+
+      this.userProfileService.updateUserProfile(this.username, updateUserProfileDTO).subscribe({
+        next: (response) => {
+          console.log('Perfil atualizado com sucesso!');
+          this.userProfile = response;
+          this.closeModal();
+
+          this.router.navigate(['/dashboard'])
+          sessionStorage.setItem("username", updateUserProfileDTO.username)
+        },
+        error: (err) => {
+          console.error('Erro ao atualizar perfil', err);
+        }
+      });
     }
   }
 }

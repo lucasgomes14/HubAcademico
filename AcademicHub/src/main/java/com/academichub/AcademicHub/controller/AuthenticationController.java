@@ -12,8 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -44,12 +42,12 @@ public class AuthenticationController {
        esse método ele faz o hash do login e senha e compara com os usuários que estão no banco
     */
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Validated LoginRequestDTO body) {
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Validated LoginRequestDTO body) {
         User user = userService.userLogin(body.email());
 
         if (passwordEncoder.matches(body.password(), user.getPassword())) {
             String token = tokenService.generateToken(user);
-            return ResponseEntity.ok(new LoginResponseDTO(user.getEmail(), token));
+            return ResponseEntity.ok(new LoginResponseDTO(user.getEmail(), user.getUsername(), token));
         }
         return ResponseEntity.badRequest().build();
     }

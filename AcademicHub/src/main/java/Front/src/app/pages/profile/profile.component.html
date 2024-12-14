@@ -22,7 +22,7 @@
   </aside>
 
   <aside class="profile-right">
-    <button type="button" (click)="showModal()">Editar Perfil</button>
+    <button *ngIf="isOwner" type="button" (click)="showModal()">Editar Perfil</button>
     <div class="stats">
       <p><b>{{ userProfile?.followingCount || 0 }}</b> Following</p>
       <p><b>{{ userProfile?.followersCount || 0 }}</b> Followers</p>
@@ -30,23 +30,24 @@
   </aside>
 </section>
 
-<section id="editModal" class="modal">
+<section id="editModal" class="modal" *ngIf="isOwner">
   <div class="modal-content">
     <button class="close-btn" (click)="closeModal()">&times;</button>
     <h2>Editar Perfil</h2>
-    <form id="editProfileForm" onsubmit="submitForm(event)">
+    <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
       <label for="name">Nome</label>
-      <input type="text" id="name" placeholder="Digite seu nome" required>
+      <input type="text" formControlName="name" placeholder="Digite seu nome" required>
 
       <label for="username">Username</label>
-      <input type="text" id="username" placeholder="Digite seu username" required>
+      <input type="text" formControlName="username" placeholder="Digite seu username" required>
 
       <label for="bio">Bio</label>
-      <textarea id="bio" placeholder="Digite uma breve descrição sobre você" required></textarea>
+      <textarea formControlName="bio" placeholder="Digite uma breve descrição sobre você" required></textarea>
 
       <label for="profileImage">Imagem de Perfil</label>
-      <input type="file" id="profileImage" onchange="onImageChange(event)">
-      <button type="submit">Salvar Alterações</button>
+      <input type="file" (change)="onImageChange($event)">
+
+      <button type="submit" [disabled]="editProfileForm.invalid">Salvar Alterações</button>
     </form>
   </div>
 </section>
