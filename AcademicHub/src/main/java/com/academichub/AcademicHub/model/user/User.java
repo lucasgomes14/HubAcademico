@@ -10,11 +10,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/* implementa o userDetails que é uma classe do spring security,
-    que é usada para identificar uma classe que represente um usuário
-    que será autenticado na aplicação
-*/
-
 @Getter
 @Setter
 @Entity
@@ -33,6 +28,9 @@ public class User {
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
+
+    @Column(name = "bio")
+    private String bio;
 
     @Column(name = "date_and_time_of_user_creation", nullable = false)
     private LocalDateTime dateAndTimeOfUserCreation;
@@ -54,6 +52,9 @@ public class User {
     @Column(name = "course", nullable = false)
     private Course course;
 
+    @Column(name = "profile_picture")
+    private String profilePicture;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
 
@@ -62,9 +63,12 @@ public class User {
 
     @ManyToMany
     @JoinTable(
-            name = "user_friend",
+            name = "user_following",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "friend_id")
+            inverseJoinColumns = @JoinColumn(name = "following_id")
     )
-    private List<User> friends = new ArrayList<>();
+    private List<User> following = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "following")
+    private List<User> followers = new ArrayList<>();
 }

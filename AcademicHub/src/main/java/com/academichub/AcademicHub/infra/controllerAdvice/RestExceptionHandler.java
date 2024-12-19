@@ -54,4 +54,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<String> userNotFoundHandler(UserNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("User not found");
     }
+
+    @ExceptionHandler(ContainsSpaceException.class)
+    private ResponseEntity<String> containsSpaceHandler(ContainsSpaceException exception) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("The username contains a space");
+    }
+
+    @ExceptionHandler(ContainsSpecialCharactersException.class)
+    private ResponseEntity<String> containsSpecialCharactersHandler(ContainsSpecialCharactersException exception) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Special characters found in username");
+    }
 }

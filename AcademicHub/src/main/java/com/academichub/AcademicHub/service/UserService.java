@@ -39,11 +39,13 @@ public class UserService {
         user.setName(data.name());
         user.setLastName(data.lastName());
         user.setUsername(data.username());
+        user.setBio(data.bio());
         user.setEmail(data.email());
         user.setPassword(passwordEncoder.encode(data.password()));
         user.setRole(role);
         user.setCourse(course);
         user.setDateAndTimeOfUserCreation(LocalDateTime.now());
+        user.setProfilePicture(null);
 
         return user;
     }
