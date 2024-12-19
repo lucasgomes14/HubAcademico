@@ -64,4 +64,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<String> containsSpecialCharactersHandler(ContainsSpecialCharactersException exception) {
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Special characters found in username");
     }
+
+    @ExceptionHandler(PostNotFoundException.class)
+    private ResponseEntity<String> postNotFoundHandler(PostNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Post not found");
+    }
 }

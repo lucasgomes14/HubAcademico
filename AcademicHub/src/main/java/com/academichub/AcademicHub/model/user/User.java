@@ -2,6 +2,8 @@ package com.academichub.AcademicHub.model.user;
 
 import com.academichub.AcademicHub.model.comment.Comment;
 import com.academichub.AcademicHub.model.post.Post;
+import com.academichub.AcademicHub.model.likePost.LikePost;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,6 +43,7 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @JsonIgnore
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -55,7 +58,7 @@ public class User {
     @Column(name = "profile_picture")
     private String profilePicture;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Post> posts = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -71,4 +74,7 @@ public class User {
 
     @ManyToMany(mappedBy = "following")
     private List<User> followers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LikePost> likes = new ArrayList<>();
 }

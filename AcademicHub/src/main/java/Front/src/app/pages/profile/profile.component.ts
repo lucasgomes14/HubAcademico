@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserProfileService} from '../../services/user-profile.service';
+import {Post, UserProfileService} from '../../services/user-profile.service';
 import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 
@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
   username: string = '';    // Variável para armazenar o username da URL
   isOwner: boolean = false;
   editProfileForm : FormGroup;
+  isLiked: boolean = false; // corrigir pq ta bugado
 
   constructor(
     private route: ActivatedRoute, // Para acessar os parâmetros da URL
@@ -127,5 +128,29 @@ export class ProfileComponent implements OnInit {
         }
       });
     }
+  }
+
+  likePost(postId: number) {
+    const username = sessionStorage.getItem('username') || '';
+    this.userProfileService.likePost(postId, username).subscribe({
+      next: (isLiked: boolean) => {
+        if (isLiked) {
+          const post = this.userProfile.posts.find((p: Post) => p.id === postId);
+          if (post) {
+            post.totalLikes++;
+            this.isLiked = true;
+          }
+        } else {
+          const post = this.userProfile.posts.find((p: Post) => p.id === postId);
+          if (post) {
+            post.totalLikes--;
+            this.isLiked = false;
+          }
+        }
+      },
+      error: (err) => {
+        console.error('Erro ao curtir o post', err);
+      }
+    });
   }
 }

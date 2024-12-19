@@ -21,9 +21,12 @@ public class DashboardService {
     }
 
     private DashboardResponseDTO createUserProfile(User user) {
-        return new DashboardResponseDTO(user.getName(), user.getLastName(),
-                user.getUsername(), user.getBio(), user.getDateAndTimeOfUserCreation(), user.getUserUpdateDateAndTime(),
-                user.getEmail(), user.getRole(), user.getCourse(), user.getProfilePicture(), user.getPosts(),
-                user.getFollowing(), user.getFollowers());
+        return new DashboardResponseDTO(
+                user.getUsername(),
+                user.getRole(),
+                user.getCourse(),
+                user.getProfilePicture(),
+                user.getFollowing()
+        );
     }
 }
