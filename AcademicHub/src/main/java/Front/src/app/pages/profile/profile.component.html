@@ -65,7 +65,7 @@
       </header>
       <p class="post-text">{{ post.description || "" }}</p>
       <footer class="post-footer">
-        <span (click)="likePost(post.id)"><img [src]="isLiked ? 'assets/likes.png' : 'assets/replies.png'"  alt="Likes">{{ post.totalLikes || 0 }}</span> <!-- colocar imagem de coração preechido -->
+        <span (click)="likePost(post.id)"><img src="assets/not_liked.png"  alt="Likes">{{ post.totalLikes || 0 }}</span> <!-- colocar imagem de coração preechido -->
         <span><img src="assets/replies.png" alt="Replies">{{ post.comments.length || "0" }}</span>
       </footer>
     </article>

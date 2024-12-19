@@ -49,6 +49,7 @@ public class Post {
     private List<Comment> comments = new ArrayList<>();
 
     public int getTotalLikes() {
+        totalLikes = likes.size();
         return likes.size();
     }
 }

@@ -22,7 +22,6 @@ export class ProfileComponent implements OnInit {
   username: string = '';    // Variável para armazenar o username da URL
   isOwner: boolean = false;
   editProfileForm : FormGroup;
-  isLiked: boolean = false; // corrigir pq ta bugado
 
   constructor(
     private route: ActivatedRoute, // Para acessar os parâmetros da URL
@@ -138,13 +137,11 @@ export class ProfileComponent implements OnInit {
           const post = this.userProfile.posts.find((p: Post) => p.id === postId);
           if (post) {
             post.totalLikes++;
-            this.isLiked = true;
           }
         } else {
           const post = this.userProfile.posts.find((p: Post) => p.id === postId);
           if (post) {
             post.totalLikes--;
-            this.isLiked = false;
           }
         }
       },
