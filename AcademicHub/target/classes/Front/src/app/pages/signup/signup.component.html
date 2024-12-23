@@ -1,0 +1,105 @@
+<app-default-login-layout
+  title="Sign in and start today!"
+  primaryBtnText="Signup Now"
+  secondaryBtnText="Login Now"
+  (submit)="submit()"
+  (navigate)="navigate()"
+  [disablePrimaryBtn]="!signupForm.valid">
+  <form [formGroup]="signupForm">
+
+    <div class="row">
+
+      <app-primary-input class="name"
+        formControlName="name"
+        inputName="name"
+        type="text"
+        label="Your Name"
+        placeholder="Cirilo">
+        <img src="assets/user.png" alt="User Icon"/>
+      </app-primary-input>
+
+      <app-primary-input class="lastname"
+        formControlName="lastName"
+        inputName="lastname"
+        type="text"
+        label="Your Last Name"
+        placeholder="Da Silva">
+        <img src="assets/user.png" alt="User Icon"/>
+      </app-primary-input>
+
+    </div>
+
+    <app-primary-input class="username"
+      formControlName = "username"
+      inputName="username"
+      type="text"
+      label="Your Username"
+      placeholder="thecirilo">
+      <img src="assets/user.png" alt="https://www.flaticon.com/br/icones-gratis/do-utilizador do-utilizador ícones Do-utilizador ícones criados por Tempo_doloe - Flaticon"/>
+    </app-primary-input>
+    <app-primary-input class="email"
+      formControlName ="email"
+      inputName="email"
+      type="email"
+      label="Email"
+      placeholder="cirilo@academico.ifpb.edu.br">
+      <img src="assets/svg/email.svg"/>
+    </app-primary-input>
+
+    <div class="error-email" *ngIf="signupForm.get('email')?.errors">
+      <span *ngIf="signupForm.get('email')?.hasError('required')">O email é obrigatório.</span>
+      <span *ngIf="signupForm.get('email')?.hasError('email')">Formato de email inválido.</span>
+      <span *ngIf="signupForm.get('email')?.hasError('invalidDomain')">O email deve ser do domínio "&#64;academico.ifpb.edu.br".</span>
+    </div>
+
+    <div class="row">
+      <div class="role-container">
+        <label for="role">Qual sua função?</label>
+        <select formControlName="role" id="role">
+          <option value="">Selecione sua função</option>
+          <option value="STUDENT">Estudante</option>
+          <option value="TEACHER">Professor</option>
+          <option value="COORDINATOR">Coordenador</option>
+        </select>
+      </div>
+      <div class="course-container">
+        <label for="course">Qual seu curso?</label>
+        <select formControlName="course" id="course">
+          <option value="">Selecione seu curso</option>
+          <option value="SYSTEMS_ANALYSIS_AND_DEVELOPMENT">Análise e Desenvolvimento de Sistemas</option>
+          <option value="COMPUTING">Técnico em Informática</option>
+          <option value="RENEWABLE_ENERGY_SYSTEMS">Técnico em Energias Renováveis</option>
+        </select>
+      </div>
+    </div>
+    
+    
+
+    <div class="pass">
+
+      <app-primary-input class="password"
+        formControlName="password"
+        inputName="password"
+        type="password"
+        label="Your Password">
+        <img src="assets/svg/password.svg"/>
+      </app-primary-input>
+
+      <app-primary-input class="passwordConfirm"
+        formControlName="passwordConfirm"
+        inputName="passwordConfirm"
+        type="password"
+        label="Confirm your Password">
+        <img src="assets/svg/password.svg"/>
+      </app-primary-input>
+
+    </div>
+
+    <div class="error-password" *ngIf="signupForm.get('password')?.errors">
+      <span *ngIf="signupForm.get('password')?.hasError('required')">Senha é obrigatória.</span>
+      <span *ngIf="signupForm.get('password')?.hasError('minlength')">Senha deve ter pelo menos 6 caracteres.</span>
+    </div>
+
+  </form>
+</app-default-login-layout>
+
