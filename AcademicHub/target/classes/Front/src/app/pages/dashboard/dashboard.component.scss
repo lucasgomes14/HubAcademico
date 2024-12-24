@@ -1,17 +1,27 @@
+/* Estilos gerais */
 body {
   background-color: #1B1837;
-  overflow-x: hidden;
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow-y: auto;
 }
 
+/* Sidebar */
 .sidebar {
-  position: absolute;
   background-color: #2A2649;
-  padding: 10px 15px 152px;
-  margin: -12px 160px;
+  padding: 10px 15px;
+  margin: 0;
+  margin-left: 190px;
+  width: 250px; /* Largura fixa para telas maiores */
+  position: fixed; /* Fixa a sidebar */
+  top: 0;
+  bottom: 0;
+  left: 0;
   flex-direction: column;
-  align-items: flex-start;
+  overflow-y: auto;
 }
 
 .barra {
@@ -21,6 +31,7 @@ body {
   box-sizing: border-box;
   height: auto;
   display: flex;
+  flex-direction: column;
 }
 
 .nome_hub {
@@ -61,20 +72,49 @@ body {
   margin-top: 70px;
   margin-left: 10px;
   width: 140px;
-  margin-bottom: 0px;
 }
 
+/* Caixa de texto para o usuário digitar */
 .texto-caixa {
   background-color: #2A2649;
-  margin-left: 480px;
-  margin-top: 85px; /* Ajuste para um valor mais leve, sem ultrapassar o topo */
+  margin-top: 50px;
+  margin-left: 500px; /* Ajuste o valor para alinhar com os itens */
+  margin-right: 20px; /* Adiciona algum espaço à direita */
   border-radius: 20px;
-  padding-top: 20px;
-  height: 120px;
-  width: 800px;
+  padding: 60px; /* Ajuste o padding para que o texto não fique tão no topo */
+  width: 800px; /* A largura para alinhar com os itens da barra */
   resize: none;
   margin-bottom: 20px;
   display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinha o texto à esquerda */
+  overflow: hidden; /* Impede que as barras de rolagem apareçam */
+  height: auto; /* Remove a altura fixa */
+}
+
+.texto-caixa textarea {
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  resize: none;
+  width: 100%;
+  height: 100%;
+  text-align: center; /* Inicialmente o texto fica centralizado */
+  display: flex;
+  flex-direction: column;
+}
+
+.texto-caixa textarea:focus {
+  text-align: left; /* Quando o usuário começa a digitar, o texto se alinha à esquerda */
+  padding-top: 10px; /* Ajusta o espaço superior quando o usuário começa a digitar */
+}
+
+.texto-caixa textarea::placeholder {
+  color: #ffffff; /* Cor do texto do placeholder */
+  font-style: italic; /* Texto em itálico */
+  text-align: center; /* Coloca o texto do placeholder no centro */
 }
 
 
@@ -87,7 +127,7 @@ body {
   padding: 20px;
   color: #ffffff;
   margin: 20px auto;
-  margin-left: 480px;
+  margin-left: 500px;
 }
 
 /* Informações do usuário e imagem do perfil */
@@ -125,11 +165,10 @@ body {
   margin-bottom: 15px;
 }
 
-
 .post-row {
   display: flex;
   gap: 20px;
-  margin-left:640px;
+  margin-left: 640px;
 }
 
 .icons {
