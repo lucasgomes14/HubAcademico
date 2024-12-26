@@ -8,7 +8,6 @@ body {
   flex-direction: column;
   overflow-y: auto;
   align-items: center; /* Centraliza verticalmente */
-
 }
 
 .post {
@@ -21,54 +20,54 @@ body {
   background-color: #2A2649;
   padding: 10px 15px;
   width: 250px; /* Largura inicial fixa */
-  position: fixed; /* Fixa a sidebar */
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   flex-direction: column;
   overflow-y: auto;
-  transition: width 0.3s ease; /* Suaviza a transição de tamanho */
+  transition: width 0.3s ease; 
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1240px) {
   .sidebar {
-    width: 200px; /* Reduz a largura para telas médias */
+    width: 200px; 
   }
 
   .texto-caixa {
-    margin-left: 220px; /* Ajusta a margem do conteúdo principal */
+    margin-left: 220px; 
   }
 }
 
 @media (max-width: 768px) {
   .sidebar {
-    width: 150px; /* Reduz ainda mais a largura */
+    width: 150px; 
   }
 
   .texto-caixa {
-    margin-left: 170px; /* Ajusta a margem do conteúdo principal */
+    margin-left: 170px; 
   }
 
   .item p {
-    font-size: 12px; /* Reduz o tamanho do texto dos itens */
+    font-size: 12px; 
   }
 }
 
 @media (max-width: 480px) {
   .sidebar {
-    width: 100px; /* Sidebar bem estreita */
+    width: 100px;
   }
 
   .texto-caixa {
-    margin-left: 120px; /* Ajusta a margem do conteúdo principal */
+    margin-left: 120px; 
   }
 
   .barra img {
-    width: 80px; /* Reduz o tamanho do logotipo */
+    width: 80px; 
   }
 
   .item p {
-    font-size: 10px; /* Ajusta ainda mais o tamanho do texto */
+    font-size: 10px; 
   }
 }
 
