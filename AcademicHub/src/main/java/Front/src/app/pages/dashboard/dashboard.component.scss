@@ -4,34 +4,81 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center; /* Centraliza horizontalmente o conteúdo */
   flex-direction: column;
   overflow-y: auto;
+  align-items: center; /* Centraliza verticalmente */
+
 }
 
-/* Sidebar */
+.post {
+  margin-left: 280px;
+}
+
+
 .sidebar {
+  margin-left: 180px;
   background-color: #2A2649;
   padding: 10px 15px;
-  margin: 0;
-  margin-left: 190px;
-  width: 250px; /* Largura fixa para telas maiores */
+  width: 250px; /* Largura inicial fixa */
   position: fixed; /* Fixa a sidebar */
   top: 0;
   bottom: 0;
   left: 0;
   flex-direction: column;
   overflow-y: auto;
+  transition: width 0.3s ease; /* Suaviza a transição de tamanho */
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px; /* Reduz a largura para telas médias */
+  }
+
+  .texto-caixa {
+    margin-left: 220px; /* Ajusta a margem do conteúdo principal */
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 150px; /* Reduz ainda mais a largura */
+  }
+
+  .texto-caixa {
+    margin-left: 170px; /* Ajusta a margem do conteúdo principal */
+  }
+
+  .item p {
+    font-size: 12px; /* Reduz o tamanho do texto dos itens */
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100px; /* Sidebar bem estreita */
+  }
+
+  .texto-caixa {
+    margin-left: 120px; /* Ajusta a margem do conteúdo principal */
+  }
+
+  .barra img {
+    width: 80px; /* Reduz o tamanho do logotipo */
+  }
+
+  .item p {
+    font-size: 10px; /* Ajusta ainda mais o tamanho do texto */
+  }
 }
 
 .barra {
   width: 100%;
   padding: 20px;
-  margin: 0;
   box-sizing: border-box;
-  height: auto;
   display: flex;
   flex-direction: column;
+  align-items: center; /* Centraliza na barra */
 }
 
 .nome_hub {
@@ -70,26 +117,21 @@ body {
 
 .barra img {
   margin-top: 70px;
-  margin-left: 10px;
   width: 140px;
+  display: block;
 }
 
-/* Caixa de texto para o usuário digitar */
 .texto-caixa {
   background-color: #2A2649;
-  margin-top: 50px;
-  margin-left: 500px; /* Ajuste o valor para alinhar com os itens */
-  margin-right: 20px; /* Adiciona algum espaço à direita */
+  margin: 280px auto 15px; /* Centraliza automaticamente */
   border-radius: 20px;
-  padding: 60px; /* Ajuste o padding para que o texto não fique tão no topo */
-  width: 800px; /* A largura para alinhar com os itens da barra */
-  resize: none;
-  margin-bottom: 20px;
+  padding: 30px;
+  width: 800px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Alinha o texto à esquerda */
-  overflow: hidden; /* Impede que as barras de rolagem apareçam */
-  height: auto; /* Remove a altura fixa */
+  align-items: center;
+  height: auto;
+  resize: none;
 }
 
 .texto-caixa textarea {
@@ -100,25 +142,15 @@ body {
   font-size: 15px;
   resize: none;
   width: 100%;
-  height: 100%;
-  text-align: center; /* Inicialmente o texto fica centralizado */
-  display: flex;
-  flex-direction: column;
-}
-
-.texto-caixa textarea:focus {
-  text-align: left; /* Quando o usuário começa a digitar, o texto se alinha à esquerda */
-  padding-top: 10px; /* Ajusta o espaço superior quando o usuário começa a digitar */
+  text-align: center; 
 }
 
 .texto-caixa textarea::placeholder {
-  color: #ffffff; /* Cor do texto do placeholder */
-  font-style: italic; /* Texto em itálico */
-  text-align: center; /* Coloca o texto do placeholder no centro */
+  color: #ffffff;
+  font-style: italic;
+  text-align: center;
 }
 
-
-/* Container do post */
 .post-container {
   width: 800px;
   background: #1c183d;
@@ -127,10 +159,43 @@ body {
   padding: 20px;
   color: #ffffff;
   margin: 20px auto;
-  margin-left: 500px;
 }
 
-/* Informações do usuário e imagem do perfil */
+@media (max-width: 1024px) {
+  .texto-caixa,
+  .post-container {
+    width: 90%; /* Adapta largura para 90% da tela */
+  }
+
+  .barra img {
+    width: 120px; /* Ajusta tamanho da imagem */
+  }
+}
+
+@media (max-width: 768px) {
+  .texto-caixa,
+  .post-container {
+    width: 100%; /* Usa 100% da largura disponível */
+    margin: 20px; /* Margem para dar espaço */
+  }
+
+  .barra img {
+    width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .texto-caixa,
+  .post-container {
+    padding: 15px; /* Reduz o preenchimento */
+    font-size: 14px; /* Ajusta o tamanho da fonte */
+  }
+
+  .barra img {
+    width: 80px; /* Diminui ainda mais a imagem */
+  }
+}
+
 .user-profile {
   display: flex;
   align-items: center;
