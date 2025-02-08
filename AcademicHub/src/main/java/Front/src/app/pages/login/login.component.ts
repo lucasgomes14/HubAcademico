@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { DefaultLoginLayoutComponent } from '../../components/default-login-layout/default-login-layout.component';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
   FormRecord,
   ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
@@ -42,7 +45,7 @@ export class LoginComponent {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(6),
+        Validators.minLength(8),
       ]),
     });
   }
@@ -64,5 +67,16 @@ export class LoginComponent {
 
   navigate() {
     this.router.navigate(['signup']);
+  }
+
+  // Validação para aceitar somente e-mails com domínio específico
+  emailDomainValidator(domain: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const email = control.value;
+      if (email && !email.endsWith(`@${domain}`)) {
+        return { invalidDomain: { value: email } };
+      }
+      return null;
+    };
   }
 }
