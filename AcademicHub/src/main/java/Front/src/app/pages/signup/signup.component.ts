@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { DefaultLoginLayoutComponent } from '../../components/default-login-layout/default-login-layout.component';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
 import { Router } from '@angular/router';
 import { SignupService } from '../../services/signup.service';
@@ -26,7 +31,7 @@ interface SignupForm {
     DefaultLoginLayoutComponent,
     ReactiveFormsModule,
     PrimaryInputComponent,
-    CommonModule
+    CommonModule,
   ],
   providers: [SignupService],
   templateUrl: './signup.component.html',
@@ -40,20 +45,38 @@ export class SignupComponent {
     private signupService: SignupService,
     private toastService: ToastrService
   ) {
-    this.signupForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      lastName: new FormControl('', [Validators.required, Validators.minLength(3)]), // Alterado para `lastName`
-      username: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      email: new FormControl('', [
-        Validators.required,
-        Validators.email,
-        this.emailDomainValidator('academico.ifpb.edu.br'),
-      ]),
-      role: new FormControl('', [Validators.required]),
-      course: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    }, { validators: this.passwordMatchValidator });
+    this.signupForm = new FormGroup(
+      {
+        name: new FormControl('', [
+          Validators.required,
+          Validators.minLength(3),
+        ]),
+        lastName: new FormControl('', [
+          Validators.required,
+          Validators.minLength(3),
+        ]), // Alterado para `lastName`
+        username: new FormControl('', [
+          Validators.required,
+          Validators.minLength(3),
+        ]),
+        email: new FormControl('', [
+          Validators.required,
+          Validators.email,
+          this.emailDomainValidator('academico.ifpb.edu.br'),
+        ]),
+        role: new FormControl('', [Validators.required]),
+        course: new FormControl('', [Validators.required]),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.minLength(8),
+        ]),
+        passwordConfirm: new FormControl('', [
+          Validators.required,
+          Validators.minLength(8),
+        ]),
+      },
+      { validators: this.passwordMatchValidator }
+    );
   }
 
   // Validação para garantir que os campos de senha sejam iguais
@@ -86,16 +109,25 @@ export class SignupComponent {
       // Enviar somente os dados esperados pelo backend
       this.signupService.signup(formData).subscribe({
         next: () => {
-          this.toastService.success('Registro realizado com sucesso!', 'Sucesso');
+          this.toastService.success(
+            'Registro realizado com sucesso!',
+            'Sucesso'
+          );
           this.router.navigate(['/login']);
         },
         error: (err) => {
-          this.toastService.error('Erro ao realizar o registro. Tente novamente.', 'Erro');
+          this.toastService.error(
+            'Erro ao realizar o registro. Tente novamente.',
+            'Erro'
+          );
           console.error('Erro no registro:', err);
         },
       });
     } else {
-      this.toastService.warning('Preencha todos os campos corretamente.', 'Atenção');
+      this.toastService.warning(
+        'Preencha todos os campos corretamente.',
+        'Atenção'
+      );
     }
   }
 
@@ -104,4 +136,3 @@ export class SignupComponent {
     this.router.navigate(['login']);
   }
 }
-
