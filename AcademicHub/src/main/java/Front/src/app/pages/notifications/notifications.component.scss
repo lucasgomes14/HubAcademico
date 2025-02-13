@@ -127,12 +127,14 @@ body {
   flex-direction: column;
   background-color: #2A2649;
   width: 800px;
+  margin-top: -200px;
 }
 
 .content header {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  margin-top: 12px;
 }
 
 .content img {
@@ -161,20 +163,47 @@ span {
 
 small {
   color: #2A2649;
-  margin-bottom: 20pxs;
+  margin-bottom: 20px;
 }
 
 #info {
   display: table;
   align-items: center; // Alinha a imagem e o texto verticalmente
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .dot {
-  margin-left: 10px;
+  margin-left: -15px;
   height: 10px;
   width: 10px;
   background-color:#645f97;
   border-radius: 50%;
   display: inline-block;
+}
+
+.user1-info {
+  background-color:#1B1837;
+  padding: 14px 10px 10px;
+  margin-left: -10px;
+}
+
+.toggle {
+  cursor: pointer;
+}
+
+#action {
+  width: 20px;
+  float: right;
+}
+
+.text p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
 }
