@@ -17,26 +17,17 @@ public class UserProfileService {
 
     private final UserRepository userRepository;
 
-    public UserProfileResponseDTO getUserProfile(String username) {
-        validateUsername(username);
+    public User getUserProfile(String username) {
+//        validateUsername(username);
 
-        User user = userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
-
-        return createUserProfile(user);
+        return userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
     }
 
-    private void validateUsername(String username) {
-        if (username.trim().isEmpty()) {
-            throw new EmptyUsernameException();
-        }
-    }
-
-    private UserProfileResponseDTO createUserProfile(User user) {
-        return new UserProfileResponseDTO(user.getName(), user.getLastName(),
-                user.getUsername(), user.getBio(), user.getDateAndTimeOfUserCreation(), user.getUserUpdateDateAndTime(),
-                user.getEmail(), user.getRole(), user.getCourse(), user.getProfilePicture(), user.getPosts(),
-                user.getFollowing().size(), user.getFollowers().size());
-    }
+//    private void validateUsername(String username) {
+//        if (username.trim().isEmpty()) {
+//            throw new EmptyUsernameException();
+//        }
+//    }
 
     @Transactional
     public boolean updateUserProfile(String username, String name, String newUsername, String bio, String profilePicture) {

@@ -53,7 +53,7 @@ public class User {
     private Course course;
 
     @Column(name = "profile_picture")
-    private String profilePicture;
+    private byte[] profilePicture;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
