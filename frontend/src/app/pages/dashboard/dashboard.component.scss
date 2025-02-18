@@ -1,3 +1,6 @@
+a {
+  color: #ffffff;
+}
 
 body {
   background-color: #1B1837;
@@ -34,25 +37,25 @@ body {
 
 @media (max-width: 1240px) {
   .sidebar {
-    width: 200px; 
+    width: 200px;
   }
 
   .texto-caixa {
-    margin-left: 220px; 
+    margin-left: 220px;
   }
 }
 
 @media (max-width: 768px) {
   .sidebar {
-    width: 150px; 
+    width: 150px;
   }
 
   .texto-caixa {
-    margin-left: 170px; 
+    margin-left: 170px;
   }
 
   .item p {
-    font-size: 12px; 
+    font-size: 12px;
   }
 }
 
@@ -62,15 +65,15 @@ body {
   }
 
   .texto-caixa {
-    margin-left: 120px; 
+    margin-left: 120px;
   }
 
   .barra img {
-    width: 80px; 
+    width: 80px;
   }
 
   .item p {
-    font-size: 10px; 
+    font-size: 10px;
   }
 }
 
@@ -144,7 +147,7 @@ body {
   font-size: 15px;
   resize: none;
   width: 100%;
-  text-align: center; 
+  text-align: center;
 }
 
 .texto-caixa textarea::placeholder {
