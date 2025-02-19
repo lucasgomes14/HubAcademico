@@ -137,6 +137,7 @@ body {
   align-items: center;
   height: auto;
   resize: none;
+  color: #ffffff;
 }
 
 .texto-caixa textarea {
@@ -261,4 +262,30 @@ body {
 
 .icon-item span {
   font-size: 14px;
+}
+
+.enviar {
+  display: flex;
+  align-items: center;
+  background: #1c183d;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 1.0s ease;
+  gap: 6px;
+  margin-left: 690px;
+}
+
+.enviar:hover {
+  background: #403888;
+
+}
+
+.botao_envio {
+  width: 18px;
+  height: 18px;
 }
