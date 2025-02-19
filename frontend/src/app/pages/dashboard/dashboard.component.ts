@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { DashboardService, DashboardPostDTO  } from '../../services/dashboard.service';
 import {NgForOf} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +9,8 @@ import {NgForOf} from '@angular/common';
   styleUrls: ['./dashboard.component.scss'],
 
   imports: [
-    NgForOf
+    NgForOf,
+    FormsModule
   ]
 })
 export class DashboardComponent implements OnInit {
@@ -23,6 +25,8 @@ export class DashboardComponent implements OnInit {
 
   posts: DashboardPostDTO[] = [];
 
+  postText: string = '';
+
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
@@ -36,6 +40,26 @@ export class DashboardComponent implements OnInit {
       },
       error: (error) => {
         console.error('Erro ao carregar posts:', error);
+      }
+    });
+  }
+
+  postar() {
+    if (!this.postText.trim()) {
+      alert('O post não pode estar vazio!');
+      return;
+    }
+
+    const postData = { description: this.postText };
+
+    this.dashboardService.createPost(postData).subscribe({
+      next: () => {
+        alert('Post enviado com sucesso!');
+        this.postText = '';
+      },
+      error: (err) => {
+        console.error('Erro ao postar:', err);
+        alert('Erro ao postar. Tente novamente.');
       }
     });
   }

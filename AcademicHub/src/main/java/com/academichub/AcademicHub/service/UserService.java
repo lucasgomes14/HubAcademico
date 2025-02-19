@@ -13,12 +13,9 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
 
-    public User cadasterUser(RegisterDTO data) {
+    public User cadasterUser(User user) {
 //        validatesCadaster(data.name(), data.lastName(), data.email(), data.password(), data.username());
-
-        User user = userMapper.from(data);
 
         return userRepository.save(user);
     }

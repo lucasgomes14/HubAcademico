@@ -42,123 +42,13 @@
       </div>
     </div>
 
-<!--     <div class="post">-->
-<!--       <textarea placeholder="O que você está pensando?" class="texto-caixa"></textarea>-->
-<!--        <div class="post-container">-->
-<!--          &lt;!&ndash; Informações do usuário &ndash;&gt;-->
-<!--          <div class="user-profile">-->
-<!--            <img src="assets/profile-image.png" alt="User Profile" class="profile-image">-->
-<!--            <div class="user-info">-->
-<!--              <p class="username">Robertin</p>-->
-<!--              <small class="post-time">2h atrás</small>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--          &lt;!&ndash; Texto da postagem &ndash;&gt;-->
-<!--          <p class="post-text">a galinha de dona cleide </p>-->
-
-<!--          &lt;!&ndash; Ícones de curtidas e comentários &ndash;&gt;-->
-<!--          <div class="post-row">-->
-<!--            <div class="icons">-->
-<!--              <div class="icon-item">-->
-<!--                <img src="assets/likes.png" alt="Like">-->
-<!--                <span>14</span>-->
-<!--              </div>-->
-<!--              <div class="icon-item">-->
-<!--                <img src="assets/replies.png" alt="Comment">-->
-<!--                <span>2</span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        <div class="post-container">-->
-<!--          &lt;!&ndash; Informações do usuário &ndash;&gt;-->
-<!--          <div class="user-profile">-->
-<!--            <img src="assets/profile-image.png" alt="User Profile" class="profile-image">-->
-<!--            <div class="user-info">-->
-<!--              <p class="username">Robertin</p>-->
-<!--              <small class="post-time">2h atrás</small>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--          &lt;!&ndash; Texto da postagem &ndash;&gt;-->
-<!--          <p class="post-text">a galinha de dona cleide </p>-->
-
-<!--          &lt;!&ndash; Ícones de curtidas e comentários &ndash;&gt;-->
-<!--          <div class="post-row">-->
-<!--            <div class="icons">-->
-<!--              <div class="icon-item">-->
-<!--                <img src="assets/likes.png" alt="Like">-->
-<!--                <span>14</span>-->
-<!--              </div>-->
-<!--              <div class="icon-item">-->
-<!--                <img src="assets/replies.png" alt="Comment">-->
-<!--                <span>2</span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        <div class="post-container">-->
-<!--          &lt;!&ndash; Informações do usuário &ndash;&gt;-->
-<!--          <div class="user-profile">-->
-<!--            <img src="assets/profile2.png" alt="User Profile" class="profile-image">-->
-<!--            <div class="user-info">-->
-<!--              <p class="username">jotave</p>-->
-<!--              <small class="post-time">1h atrás</small>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--          &lt;!&ndash; Texto da postagem &ndash;&gt;-->
-<!--          <p class="post-text">nem te conto o cume da tua mae</p>-->
-
-<!--          &lt;!&ndash; Ícones de curtidas e comentários &ndash;&gt;-->
-<!--          <div class="post-row">-->
-<!--            <div class="icons">-->
-<!--              <div class="icon-item">-->
-<!--                <img src="assets/likes.png" alt="Like">-->
-<!--                <span>21</span>-->
-<!--              </div>-->
-<!--              <div class="icon-item">-->
-<!--                <img src="assets/replies.png" alt="Comment">-->
-<!--                <span>1</span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        <div class="post-container">-->
-<!--          &lt;!&ndash; Informações do usuário &ndash;&gt;-->
-<!--          <div class="user-profile">-->
-<!--            <img src="assets/eu.jpg" alt="User Profile" class="profile-image">-->
-<!--            <div class="user-info">-->
-<!--              <p class="username">jotave</p>-->
-<!--              <small class="post-time">1h atrás</small>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--          &lt;!&ndash; Texto da postagem &ndash;&gt;-->
-<!--          <p class="post-text">paz do senhor</p>-->
-
-<!--          &lt;!&ndash; Ícones de curtidas e comentários &ndash;&gt;-->
-<!--          <div class="post-row">-->
-<!--            <div class="icons">-->
-<!--              <div class="icon-item">-->
-<!--                <img src="assets/likes.png" alt="Like">-->
-<!--                <span>5001</span>-->
-<!--              </div>-->
-<!--              <div class="icon-item">-->
-<!--                <img src="assets/replies.png" alt="Comment">-->
-<!--                <span>1245</span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
     <div class="post">
-      <textarea placeholder="O que você está pensando?" class="texto-caixa"></textarea>
+      <textarea [(ngModel)]="postText" placeholder="O que você está pensando?" class="texto-caixa"></textarea>
+
+      <button class="enviar" (click)="postar()">
+        <p>Postar</p>
+        <img src="assets/aviao.png" alt="" class="botao_envio">
+      </button>
 
       <div *ngFor="let post of posts" class="post-container">
         <!-- Informações do usuário -->

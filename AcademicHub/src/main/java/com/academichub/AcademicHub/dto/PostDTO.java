@@ -1,5 +1,4 @@
 package com.academichub.AcademicHub.dto;
 
-public record PostDTO(String description,
-                      byte[] content) {
+public record PostDTO(String description) {
 }

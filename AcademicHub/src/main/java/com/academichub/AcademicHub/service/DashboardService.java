@@ -19,7 +19,7 @@ public class DashboardService {
 
     public List<Post> getFriendPosts(User user) {
 
-        var posts = postRepository.findPostsByFollowing(user.getFollowing());
+        var posts = postRepository.findPostsByFollowingAndUser(user.getFollowing(), user);
 
         return posts;
     }

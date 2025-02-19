@@ -26,10 +26,7 @@ public class DashboardController {
 
     @GetMapping("/feed")
     public ResponseEntity<List<DashboardPostDTO>> getfriendPosts(@AuthenticationPrincipal User authenticatedUser) {
-
-        System.out.println(authenticatedUser.getEmail());
         var friendPosts = dashboardService.getFriendPosts(authenticatedUser);
-        System.out.println(dashboardMapper.from(friendPosts).toString());
 
         return ResponseEntity.ok().body(dashboardMapper.from(friendPosts));
     }

@@ -13,7 +13,6 @@ public class PostMapper {
         var post = new Post();
 
         post.setDescription(postDTO.description());
-        post.setContent(postDTO.content());
         post.setDateAndTimeOfPublication(LocalDateTime.now());
         post.setLikes(0);
         post.setUser(user);
