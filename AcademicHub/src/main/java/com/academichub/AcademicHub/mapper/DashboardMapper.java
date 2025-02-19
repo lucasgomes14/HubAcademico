@@ -18,7 +18,6 @@ public class DashboardMapper {
                         post.getUser().getUsername(),
                         postTime(post.getDateAndTimeOfPublication()),
                         post.getDescription(),
-                        post.getContent(),
                         post.getLikes(),
                         post.getComments().size()
                 ))

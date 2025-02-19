@@ -17,11 +17,9 @@ public class DashboardService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
 
-    public List<Post> getFriendPosts(User user, int limit) {
+    public List<Post> getFriendPosts(User user) {
 
-        PageRequest pageRequest = PageRequest.of(0, limit);
-
-        var posts = postRepository.findPostsByFollowing(user.getFollowing(), pageRequest);
+        var posts = postRepository.findPostsByFollowing(user.getFollowing());
 
         return posts;
     }

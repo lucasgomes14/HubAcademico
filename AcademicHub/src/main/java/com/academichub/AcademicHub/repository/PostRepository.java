@@ -13,5 +13,5 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("SELECT p FROM Post p WHERE p.user IN :following ORDER BY p.dateAndTimeOfPublication DESC")
-    List<Post> findPostsByFollowing(@Param("following") List<User> following, Pageable pageable);
+    List<Post> findPostsByFollowing(@Param("following") List<User> following);
 }

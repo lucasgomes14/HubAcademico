@@ -25,13 +25,11 @@ public class DashboardController {
     private final PostMapper postMapper;
 
     @GetMapping("/feed")
-    public ResponseEntity<List<DashboardPostDTO>> getfriendPosts(@AuthenticationPrincipal User authenticatedUser, @RequestParam(defaultValue = "30") int limit) {
+    public ResponseEntity<List<DashboardPostDTO>> getfriendPosts(@AuthenticationPrincipal User authenticatedUser) {
 
-
-        System.out.println(authenticatedUser);
-        System.out.println(limit);
-
-        var friendPosts = dashboardService.getFriendPosts(authenticatedUser, limit);
+        System.out.println(authenticatedUser.getEmail());
+        var friendPosts = dashboardService.getFriendPosts(authenticatedUser);
+        System.out.println(dashboardMapper.from(friendPosts).toString());
 
         return ResponseEntity.ok().body(dashboardMapper.from(friendPosts));
     }
