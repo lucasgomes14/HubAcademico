@@ -2,6 +2,7 @@ package com.academichub.AcademicHub.controller;
 
 import com.academichub.AcademicHub.dto.UpdateUserProfileDTO;
 import com.academichub.AcademicHub.dto.UserProfileResponseDTO;
+import com.academichub.AcademicHub.mapper.UserProfileMapper;
 import com.academichub.AcademicHub.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,12 +16,14 @@ public class UserProfileController {
 
     private final UserProfileService userProfileService;
 
+    private final UserProfileMapper userProfileMapper;
+
     @GetMapping("/{username}")
     public ResponseEntity<UserProfileResponseDTO> getUserProfile(@PathVariable String username) {
-        UserProfileResponseDTO userProfile = userProfileService.getUserProfile(username);
+        var userProfile = userProfileService.getUserProfile(username);
 
         if (userProfile != null) {
-            return ResponseEntity.ok(userProfile);
+            return ResponseEntity.ok(userProfileMapper.from(userProfile));
         }
 
         return ResponseEntity.notFound().build();

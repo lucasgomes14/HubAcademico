@@ -39,6 +39,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll() // permite que qualquer role faça um post no link /auth/login
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll() // permite que qualquer role faça um post no link /auth/register
+                        .requestMatchers(HttpMethod.GET, "/dashboard/feed").authenticated()
                         .anyRequest().authenticated() // qualquer outra requisição tem que ter usuario autenticado
                 )
                 // adiciona o filtro antes dos requestMatchers, para fazer uma verificação, vê o token, usuario, a role
