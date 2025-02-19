@@ -5,7 +5,6 @@ import com.academichub.AcademicHub.model.user.User;
 import com.academichub.AcademicHub.repository.PostRepository;
 import com.academichub.AcademicHub.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,9 +18,7 @@ public class DashboardService {
 
     public List<Post> getFriendPosts(User user) {
 
-        var posts = postRepository.findPostsByFollowingAndUser(user.getFollowing(), user);
-
-        return posts;
+        return postRepository.findPostsByFollowingAndUser(user.getFollowing(), user);
     }
 
     public Post saveNewPost(Post post) {
