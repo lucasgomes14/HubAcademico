@@ -31,8 +31,8 @@ public class DashboardMapper {
             return time.toDays() + "d atrás";
         } else if (time.toHours() > 0) {
             return time.toHours() + "h atrás";
-        }
-
+        } else if (time.toMinutes() == 0 )
+            return "Agora mesmo";
         return time.toMinutes() + "m atrás";
     }
 }
