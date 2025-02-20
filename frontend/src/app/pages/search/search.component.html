@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -8,17 +7,29 @@
 </head>
 <body>
   <div class="barra_pesquisa">
-    <textarea placeholder="Search" class="texto-caixa"></textarea>
-  </div>
+    <input
+  type="text"
+  [(ngModel)]="searchTerm"
+  (input)="buscarUsuarios()"
+  placeholder="Search"
+  class="texto-caixa"
+  />
   <img class="pesquisa" src="assets/procurar (1).png" alt="">
+  </div>
+
+  <ul *ngIf="usuarios.length > 0" class="resultado-lista">
+    <li *ngFor="let usuario of usuarios" class="resultado-item">
+      <img [src]="'data:image/png;base64,' + usuario.profilePicture" alt="User Profile">
+      <span>{{ usuario.username }}</span>
+    </li>
+  </ul>
+
   <div class="sidebar">
     <header class="barra">
       <img src="assets/LogoHub.png" alt="Logo Hub Acadêmico">
     </header>
-    <!-- Nome do Hub -->
     <p class="nome_hub">Hub Acadêmico</p>
     <div>
-    <!-- Menu lateral -->
       <nav class="barra1">
         <div class="item">
           <img src="assets/casa (1).png" alt="casa">
@@ -43,6 +54,5 @@
       </nav>
     </div>
   </div>
-  
 </body>
 </html>
