@@ -31,12 +31,17 @@ public class UserProfileController {
 
     @PutMapping("/{username}")
     public ResponseEntity<?> updateUserProfile(@PathVariable String username, @RequestBody UpdateUserProfileDTO updateUserProfileDTO) {
-        boolean updated = userProfileService.updateUserProfile(username, updateUserProfileDTO.name(), updateUserProfileDTO.username(), updateUserProfileDTO.bio(), updateUserProfileDTO.profilePicture());
 
-        if (updated) {
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        try {
+            var user = userProfileService.getUserProfile(username);
+
+            user = userProfileMapper.from(user, updateUserProfileDTO);
+
+            userProfileService.updateUserProfile(user);
+
+            return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
     }
 }

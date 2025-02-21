@@ -73,7 +73,7 @@ export class ProfileComponent implements OnInit {
   getProfilePicture(): string {
     return this.userProfile?.profilePicture
       ? `data:image/jpeg;base64,${this.userProfile.profilePicture}`
-      : 'assets/profile-image.png'; // Imagem padrão caso não tenha
+      : 'assets/Default-Profile-Picture.png'; // Imagem padrão caso não tenha
   }
 
   showModal() {
@@ -98,8 +98,15 @@ export class ProfileComponent implements OnInit {
   onImageChange(event: any) {
     const file = event.target.files[0];
     if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.editProfileForm.patchValue({ profilePicture: reader.result?.toString().split(',')[1] })
+      };
+
+      reader.readAsDataURL(file);
+    } else {
       this.editProfileForm.patchValue({
-        profilePicture: file
+        profilePicture: null
       });
     }
   }
