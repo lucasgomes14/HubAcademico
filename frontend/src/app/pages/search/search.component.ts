@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+//import { router } from './../../app.routes';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -14,6 +16,8 @@ import { CommonModule } from '@angular/common';
 export class SearchComponent {
   searchTerm: string = '';
   usuarios: any[] = [];
+  @Output("navigate") onNavigate = new EventEmitter();
+  //private router: Router ;
 
   constructor(private http: HttpClient) {}
 
@@ -27,5 +31,9 @@ export class SearchComponent {
       .subscribe(response => {
         this.usuarios = response;
       });
+  }
+
+  navigate() {
+    //this.routes.navigate(['login']);
   }
 }
