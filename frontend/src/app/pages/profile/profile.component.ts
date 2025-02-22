@@ -146,6 +146,7 @@ export class ProfileComponent implements OnInit {
   toggleFollow(): void {
     this.isFollowing = !this.isFollowing;  // Altera o estado do botão
     // Aqui você pode fazer a lógica para enviar a informação ao backend (Spring Boot)
+  }
 
   loadPosts(): void {
     this.userProfileService.getPosts().subscribe({
