@@ -24,6 +24,10 @@ public class UserService {
         return userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
     }
 
+    public User findUserByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
+    }
+
 //    private void validatesCadaster(String name, String lastName, String email, String password, String username) {
 //        validateEmail(email);
 //        validateName(name);
