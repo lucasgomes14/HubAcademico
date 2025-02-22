@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserProfileService} from '../../services/user-profile.service';
-import {DatePipe, NgForOf, NgIf} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {DashboardPostDTO} from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   imports: [
     NgForOf,
-    DatePipe,
     FormsModule,
     ReactiveFormsModule,
     NgIf
@@ -21,7 +21,8 @@ export class ProfileComponent implements OnInit {
   userProfile: any = null; // Variável para armazenar os dados do perfil
   username: string = '';    // Variável para armazenar o username da URL
   isOwner: boolean = false;
-  editProfileForm : FormGroup;
+  editProfileForm: FormGroup;
+  posts: DashboardPostDTO[] = [];
 
   constructor(
     private route: ActivatedRoute, // Para acessar os parâmetros da URL
@@ -38,11 +39,14 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadPosts();
     // Obtém o username da URL
-    this.username = this.route.snapshot.paramMap.get('username') || '';
+    this.username = this.route.snapshot.paramMap.get('username') || 'me';
+    console.log("Username recebido da URL:", this.username);
 
     if (!this.username) {
       this.router.navigate(['/dashboard']);  // Redireciona para o dashboard
+      console.log("Username nao encontrado")
       return;
     }
 
@@ -73,7 +77,7 @@ export class ProfileComponent implements OnInit {
   getProfilePicture(): string {
     return this.userProfile?.profilePicture
       ? `data:image/jpeg;base64,${this.userProfile.profilePicture}`
-      : 'assets/profile-image.png'; // Imagem padrão caso não tenha
+      : 'assets/Default-Profile-Picture.png'; // Imagem padrão caso não tenha
   }
 
   showModal() {
@@ -98,13 +102,21 @@ export class ProfileComponent implements OnInit {
   onImageChange(event: any) {
     const file = event.target.files[0];
     if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.editProfileForm.patchValue({profilePicture: reader.result?.toString().split(',')[1]})
+      };
+
+      reader.readAsDataURL(file);
+    } else {
       this.editProfileForm.patchValue({
-        profilePicture: file
+        profilePicture: null
       });
     }
   }
 
   onSubmit() {
+    this.loadPosts();
     if (this.editProfileForm.valid) {
       const updateUserProfileDTO = {
         name: this.editProfileForm.value.name,
@@ -128,10 +140,38 @@ export class ProfileComponent implements OnInit {
       });
     }
   }
+
   isFollowing: boolean = false;  // Estado inicial
 
   toggleFollow(): void {
     this.isFollowing = !this.isFollowing;  // Altera o estado do botão
     // Aqui você pode fazer a lógica para enviar a informação ao backend (Spring Boot)
+
+  loadPosts(): void {
+    this.userProfileService.getPosts().subscribe({
+      next: (data) => {
+        this.posts = data;
+      },
+      error: (error) => {
+        console.error('Erro ao carregar posts:', error);
+      }
+    });
+  }
+
+  like(id: number) {
+    const likeData = {idPost: id};
+
+    this.userProfileService.like(likeData).subscribe({
+      next: (response) => {
+        const post = this.posts.find(p => p.id === id);
+        if (post) {
+          post.likes = response.countLikes; // Ou ajuste conforme a resposta do backend
+          post.isLiked = response.hasLiked;
+        }
+      },
+      error: (error) => {
+        console.error('Erro ao curtir:', error);
+      }
+    });
   }
 }
