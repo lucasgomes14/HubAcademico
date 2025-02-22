@@ -1,5 +1,7 @@
 package com.academichub.AcademicHub.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +20,17 @@ public class NotificationService {
         notification.setReferenceId(referenceId);
         notification.setRead(false);
         notificationRepository.save(notification);  
+    }
+
+    public List<Notification> getUnreadNotifications(Long userId) {
+        return notificationRepository.findByUserIdAndReadFalse(userId);
+    }
+
+    public void markAsRead(Long notificationId) {
+        Notification notification = notificationRepository.findById(notificationId).orElse(null);
+        if (notification != null) {
+            notification.setRead(true);
+            notificationRepository.save(notification);
+        }
     }
 }
