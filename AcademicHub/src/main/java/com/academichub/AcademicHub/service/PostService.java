@@ -10,6 +10,8 @@ import com.academichub.AcademicHub.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class PostService {
@@ -19,6 +21,14 @@ public class PostService {
 
     public Post findPostById(Long id) {
         return postRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User Not Found"));
+    }
+
+    public List<Post> findAllPosts(User user) {
+        return postRepository.findPostsByUserIdOrderByDateDesc(user.getId());
+    }
+
+    public List<Post> getFriendPosts(User user) {
+        return postRepository.findPostsByFollowingAndUser(user.getFollowing(), user);
     }
 
     public boolean findByUserAndPost(User user, Post post) {

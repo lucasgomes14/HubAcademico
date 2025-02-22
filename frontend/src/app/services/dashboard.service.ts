@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {map, Observable} from 'rxjs';
 
 export interface DashboardPostDTO {
@@ -23,9 +23,9 @@ export interface LikeResponseDTO {
 })
 export class DashboardService {
 
-  private urlFeed = 'http://localhost:8081/dashboard/feed'
+  private urlFeed = 'http://localhost:8081/post/feed'
   private urlPost = 'http://localhost:8081/dashboard/post'
-  private urlLike = 'http://localhost:8081/like'
+  private urlLike = 'http://localhost:8081/post/like'
 
   constructor(private http: HttpClient) {
   }
@@ -37,7 +37,9 @@ export class DashboardService {
       Authorization: `Bearer ${token}`
     });
 
-    return this.http.get<any[]>(this.urlFeed, { headers }).pipe(
+    const params = new HttpParams().set('page', 'dashboard')
+
+    return this.http.get<any[]>(this.urlFeed, { headers, params }).pipe(
       map(posts =>
         posts.map(post => ({
           ...post
