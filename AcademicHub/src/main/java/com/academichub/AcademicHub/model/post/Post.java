@@ -25,7 +25,7 @@ public class Post {
     private String description;
 
     @Column(name = "content")
-    private String content;
+    private byte[] content;
 
     @Column(name = "date_and_time_of_publication", nullable = false)
     private LocalDateTime dateAndTimeOfPublication;

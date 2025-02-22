@@ -1,12 +1,17 @@
-import { InvokeFunctionExpr } from '@angular/compiler';
-import { Component, Input, OnInit } from '@angular/core';
-
+import {Component, OnInit} from '@angular/core';
+import { DashboardService, DashboardPostDTO  } from '../../services/dashboard.service';
+import {NgForOf} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 
+  imports: [
+    NgForOf,
+    FormsModule
+  ]
 })
 export class DashboardComponent implements OnInit {
   // Definindo os itens de menu do Dashboard
@@ -18,8 +23,44 @@ export class DashboardComponent implements OnInit {
     { name: 'Profile', icon: 'assets/do-utilizador (1).png' }
   ];
 
-  constructor() { }
+  posts: DashboardPostDTO[] = [];
+
+  postText: string = '';
+
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
+    this.loadFriendPosts();
+  }
+
+  loadFriendPosts(): void {
+    this.dashboardService.getFriendPosts().subscribe({
+      next: (data) => {
+        this.posts = data;
+      },
+      error: (error) => {
+        console.error('Erro ao carregar posts:', error);
+      }
+    });
+  }
+
+  postar() {
+    if (!this.postText.trim()) {
+      alert('O post não pode estar vazio!');
+      return;
+    }
+
+    const postData = { description: this.postText };
+
+    this.dashboardService.createPost(postData).subscribe({
+      next: () => {
+        alert('Post enviado com sucesso!');
+        this.postText = '';
+      },
+      error: (err) => {
+        console.error('Erro ao postar:', err);
+        alert('Erro ao postar. Tente novamente.');
+      }
+    });
   }
 }

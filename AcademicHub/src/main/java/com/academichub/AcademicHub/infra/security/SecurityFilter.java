@@ -41,7 +41,12 @@ public class SecurityFilter extends OncePerRequestFilter {
                     .map(SimpleGrantedAuthority::new)
                     .toList();
 
-            var authentication = new UsernamePasswordAuthenticationToken(email, null, authorities);
+            var userDetails = new org.springframework.security.core.userdetails.User(
+                    user.getEmail(),
+                    user.getPassword(),
+                    authorities
+            );
+            var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         // chamando o proximo filtro que é o que chama la no SecurityConfiguration que vai ser o UsernamePasswoedAuthenticationFilter.class

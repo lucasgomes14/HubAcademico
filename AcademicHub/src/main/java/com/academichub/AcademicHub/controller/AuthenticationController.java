@@ -4,6 +4,7 @@ import com.academichub.AcademicHub.dto.LoginRequestDTO;
 import com.academichub.AcademicHub.dto.LoginResponseDTO;
 import com.academichub.AcademicHub.dto.RegisterDTO;
 import com.academichub.AcademicHub.infra.security.TokenService;
+import com.academichub.AcademicHub.mapper.UserMapper;
 import com.academichub.AcademicHub.model.user.*;
 import com.academichub.AcademicHub.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/auth")
@@ -23,14 +26,17 @@ public class AuthenticationController {
 
     private final TokenService tokenService;
 
+    private final UserMapper userMapper;
+
     /* a entrada vai ser um json que vai ser validado e o paramentro está
        em model/user/RegisterDTO coloquei assim para ficar mais organizado e limpo*/
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody @Validated RegisterDTO body) {
+    public ResponseEntity<?> register(@RequestBody @Validated RegisterDTO body) throws IOException {
 
-        User user = userService.cadasterUser(body);
+        User user = userMapper.from(body);
+        User userSave = userService.cadasterUser(user);
 
-        if (user != null) {
+        if (userSave != null) {
             return ResponseEntity.ok().build();
         }
 

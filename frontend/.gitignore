@@ -42,3 +42,11 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+HELP.md
+target/
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/src/main

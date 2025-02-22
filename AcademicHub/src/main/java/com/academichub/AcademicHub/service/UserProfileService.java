@@ -1,6 +1,5 @@
 package com.academichub.AcademicHub.service;
 
-import com.academichub.AcademicHub.dto.UserProfileResponseDTO;
 import com.academichub.AcademicHub.exceptions.EmptyUsernameException;
 import com.academichub.AcademicHub.exceptions.UserNotFoundException;
 import com.academichub.AcademicHub.model.user.User;
@@ -9,20 +8,16 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 @Service
 @RequiredArgsConstructor
 public class UserProfileService {
 
     private final UserRepository userRepository;
 
-    public UserProfileResponseDTO getUserProfile(String username) {
+    public User getUserProfile(String username) {
         validateUsername(username);
 
-        User user = userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
-
-        return createUserProfile(user);
+        return userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
     }
 
     private void validateUsername(String username) {
@@ -31,20 +26,14 @@ public class UserProfileService {
         }
     }
 
-    private UserProfileResponseDTO createUserProfile(User user) {
-        return new UserProfileResponseDTO(user.getName(), user.getLastName(),
-                user.getUsername(), user.getBio(), user.getDateAndTimeOfUserCreation(), user.getUserUpdateDateAndTime(),
-                user.getEmail(), user.getRole(), user.getCourse(), user.getProfilePicture(), user.getPosts(),
-                user.getFollowing().size(), user.getFollowers().size());
-    }
-
     @Transactional
-    public boolean updateUserProfile(String username, String name, String newUsername, String bio, String profilePicture) {
-        if (userRepository.findByUsername(newUsername).isPresent()) {
-            return false;
+    public void updateUserProfile(User user) {
+        if (userRepository.findById(user.getId()).isEmpty()) {
+            throw new UserNotFoundException();
         }
 
-        int rowsAffected = userRepository.updateUser(username, name, newUsername, bio, profilePicture, LocalDateTime.now());
-        return rowsAffected > 0;
+        getUserProfile(user.getUsername());
+
+        userRepository.save(user);
     }
 }
