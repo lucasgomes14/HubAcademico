@@ -39,11 +39,12 @@ export const routes: Routes = [
       component: SavedComponent
     },
     {
-      path: "profile",
+      path: "profile/:username",
       component: ProfileComponent
     },
     {
-        path: "profile/:username",
-        component: ProfileComponent
+      path: "profile",
+      redirectTo: "profile/me",
+      pathMatch: "full"
     }
 ];
