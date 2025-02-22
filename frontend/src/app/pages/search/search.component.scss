@@ -3,10 +3,10 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: center; /* Centraliza horizontalmente o conteúdo */
+  justify-content: center;
   flex-direction: column;
   overflow-y: auto;
-  align-items: center; /* Centraliza verticalmente */
+  align-items: center;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
@@ -34,7 +34,6 @@ body {
   flex-direction: column;
   align-items: center; /* Centraliza na barra */
 }
-
 
 .item {
   display: flex;
@@ -76,33 +75,29 @@ body {
   gap: 30px;
 }
 
-
-textarea {
-  resize: none;
-  width: 700px;
-  height: 40px;
-  border-radius: 15px;
-  margin-left: 250px;
+.barra_pesquisa {
+  position: relative;
+  margin-top: -250px;
   background-color: #2A2649;
   font-size: 15px;
   color: #ffffff;
-  padding-left: 10px;
-  padding-top: 10px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  padding: 10px 30px;
+  width: 700px; /* Define o tamanho da caixa de pesquisa */
+  margin-left: 280px;
 }
 
-.barra_pesquisa {
-  margin-top: -520px;
-}
-
-.pesquisa {
-  margin-left: 900px;
-  width: 22px;
-  height: 22px;
-  margin-top: -38px;
-
-}
-
-.texto-caixa::placeholder {
+.barra_pesquisa input {
+  border: none;
+  background: transparent;
   color: #ffffff;
+  width: 100%;
+  font-size: 15px;
   padding-left: 10px;
+}
+
+a {
+  color: #ffffff;
 }

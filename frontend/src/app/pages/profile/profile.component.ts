@@ -39,10 +39,12 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     // Obtém o username da URL
-    this.username = this.route.snapshot.paramMap.get('username') || '';
+    this.username = this.route.snapshot.paramMap.get('username') || 'me';
+    console.log("Username recebido da URL:", this.username);
 
     if (!this.username) {
       this.router.navigate(['/dashboard']);  // Redireciona para o dashboard
+      console.log("Username nao encontrado")
       return;
     }
 

@@ -1,48 +1,59 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Search</title>
+  <link rel="stylesheet" href="./search.component.scss">
 </head>
 <body>
-  <div class="barra_pesquisa">
-    <textarea placeholder="Search" class="texto-caixa"></textarea>
+  <div>
+    <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    (input)="buscarUsuarios()"
+    placeholder="Search"
+    class="barra_pesquisa"
+    />
   </div>
-  <img class="pesquisa" src="assets/procurar (1).png" alt="">
+
+  <ul *ngIf="usuarios.length > 0" class="resultado-lista">
+    <li *ngFor="let usuario of usuarios" class="resultado-item">
+      <img [src]="'data:image/png;base64,' + usuario.profilePicture" alt="User Profile">
+      <span>{{ usuario.username }}</span>
+    </li>
+  </ul>
+
   <div class="sidebar">
     <header class="barra">
       <img src="assets/LogoHub.png" alt="Logo Hub Acadêmico">
     </header>
-    <!-- Nome do Hub -->
     <p class="nome_hub">Hub Acadêmico</p>
     <div>
-    <!-- Menu lateral -->
       <nav class="barra1">
         <div class="item">
           <img src="assets/casa (1).png" alt="casa">
-          <p>Home</p>
+          <a href="">Home</a>
         </div>
         <div class="item">
           <img src="assets/procurar (1).png" alt="lupa">
-          <p>Search</p>
+          <a href="search">Search</a>
         </div>
         <div class="item">
           <img src="assets/sino (1).png" alt="sino">
-          <p>Notifications</p>
+          <a href="">Notifications</a>
+          <!-- <button class="btn-secondary" (click)="navigate()">Notifications</button> -->
         </div>
         <div class="item">
           <img src="assets/marca-paginas (1).png" alt="marca-paginas">
-          <p>Saved Posts</p>
+          <a href="">Saved Posts</a>
         </div>
         <div class="item">
           <img src="assets/do-utilizador (1).png" alt="do-utilizador">
-          <p>Profile</p>
+          <a href="">Profile</a>
         </div>
       </nav>
     </div>
   </div>
-  
 </body>
 </html>
