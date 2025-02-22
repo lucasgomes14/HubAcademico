@@ -2,6 +2,9 @@ package com.academichub.AcademicHub.mapper;
 
 import com.academichub.AcademicHub.dto.DashboardPostDTO;
 import com.academichub.AcademicHub.model.post.Post;
+import com.academichub.AcademicHub.model.user.User;
+import com.academichub.AcademicHub.service.PostService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
@@ -9,17 +12,24 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Component
 public class DashboardMapper {
-    public List<DashboardPostDTO> from(List<Post> posts) {
+
+    private final PostService postService;
+
+    public List<DashboardPostDTO> from(List<Post> posts, User user) {
         return posts.stream()
                 .map(post -> new DashboardPostDTO(
+                        post.getId(),
                         post.getUser().getProfilePicture(),
                         post.getUser().getUsername(),
                         postTime(post.getDateAndTimeOfPublication()),
                         post.getDescription(),
-                        post.getLikes(),
-                        post.getComments().size()
+                        post.getLikes().size(),
+                        post.getComments().size(),
+                        postService.findByUserAndPost(user, post)
+
                 ))
                 .collect(Collectors.toList());
     }

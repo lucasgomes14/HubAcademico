@@ -28,7 +28,7 @@ public class DashboardController {
     public ResponseEntity<List<DashboardPostDTO>> getfriendPosts(@AuthenticationPrincipal User authenticatedUser) {
         var friendPosts = dashboardService.getFriendPosts(authenticatedUser);
 
-        return ResponseEntity.ok().body(dashboardMapper.from(friendPosts));
+        return ResponseEntity.ok().body(dashboardMapper.from(friendPosts, authenticatedUser));
     }
 
     @PostMapping("/post")

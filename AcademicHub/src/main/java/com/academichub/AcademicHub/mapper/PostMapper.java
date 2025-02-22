@@ -14,7 +14,6 @@ public class PostMapper {
 
         post.setDescription(postDTO.description());
         post.setDateAndTimeOfPublication(LocalDateTime.now());
-        post.setLikes(0);
         post.setUser(user);
 
         return post;
