@@ -17,28 +17,30 @@
       <p class="nome_hub">Hub Acadêmico</p>
       <div>
       <!-- Menu lateral -->
+        <!-- Menu lateral com botões -->
         <nav class="barra1">
           <div class="item">
             <img src="assets/casa (1).png" alt="casa">
-            <a href="dashboard">Home</a>
+            <button (click)="navigateTo('/dashboard')">Home</button>
           </div>
           <div class="item">
             <img src="assets/procurar (1).png" alt="lupa">
-            <a href="search">Search</a>
+            <button (click)="navigateTo('/search')">Search</button>
           </div>
           <div class="item">
             <img src="assets/sino (1).png" alt="sino">
-            <a href="notifications">Notifications</a>
+            <button (click)="navigateTo('/notifications')">Notifications</button>
           </div>
           <div class="item">
             <img src="assets/marca-paginas (1).png" alt="marca-paginas">
-            <a href="saved">Saved Posts</a>
+            <button (click)="navigateTo('/saved')">Saved Posts</button>
           </div>
           <div class="item">
             <img src="assets/do-utilizador (1).png" alt="do-utilizador">
-            <a href="profile">Profile</a>
+            <button (click)="navigateTo('/profile/me')">Profile</button>
           </div>
         </nav>
+
       </div>
     </div>
 

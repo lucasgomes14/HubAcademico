@@ -1,7 +1,9 @@
+import { routes } from './../../app.routes';
 import {Component, OnInit} from '@angular/core';
 import { DashboardService, DashboardPostDTO  } from '../../services/dashboard.service';
 import {NgForOf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,10 +26,9 @@ export class DashboardComponent implements OnInit {
   ];
 
   posts: DashboardPostDTO[] = [];
-
   postText: string = '';
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService, private router : Router) { }
 
   ngOnInit(): void {
     this.loadFriendPosts();
@@ -62,5 +63,10 @@ export class DashboardComponent implements OnInit {
         alert('Erro ao postar. Tente novamente.');
       }
     });
+    }
+
+    navigateTo( route : String) {
+      console.log("tentando navegar para:", route);
+      this.router.navigate([route]);
   }
 }
