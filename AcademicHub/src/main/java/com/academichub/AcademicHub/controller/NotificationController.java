@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.academichub.AcademicHub.model.notification.Notification;
 import com.academichub.AcademicHub.service.NotificationService;
+import com.academichub.AcademicHub.util.AuthUtil;
 
 @RestController
 @RequestMapping("/notifications")
@@ -20,14 +21,18 @@ public class NotificationController {
     @Autowired
     private NotificationService notificationService;
 
-    @GetMapping("/{userId}")
+    @GetMapping
     public List<Notification> getNotifications(@PathVariable Long userId) {
         return notificationService.getUnreadNotifications(userId);
     } 
 
-    @PostMapping("/mark-as-read/{notificationId}")
-    public ResponseEntity<?> markAsRead(@PathVariable Long notificationId) {
-        notificationService.markAsRead(notificationId);
-        return ResponseEntity.ok().build();
+    @PostMapping
+    public ResponseEntity<?> markAllAsRead() {
+        Long userId = AuthUtil.getAuthenticatedUserId(); // Obtém o ID do usuário autenticado a partir do JWT
+        if (userId == null) {
+            return ResponseEntity.status(401).build(); // Caso o usuário não esteja autenticado
+        }
+        notificationService.markAllNotificationsAsRead(userId); // Marca todas as notificações como lidas
+        return ResponseEntity.ok().build(); // Retorna uma resposta 200 OK
     }
 }
