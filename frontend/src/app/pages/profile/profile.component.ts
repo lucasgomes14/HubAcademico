@@ -44,8 +44,8 @@ export class ProfileComponent implements OnInit {
     this.username = this.route.snapshot.paramMap.get('username') || 'me';
     console.log("Username recebido da URL:", this.username);
 
-    if (!this.username) {
-      this.router.navigate(['/dashboard']);  // Redireciona para o dashboard
+    if (this.username =='me') {
+      this.router.navigate(['/profile']);  // Redireciona para o dashboard
       console.log("Username nao encontrado")
       return;
     }
