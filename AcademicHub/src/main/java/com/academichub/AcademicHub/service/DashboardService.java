@@ -7,19 +7,12 @@ import com.academichub.AcademicHub.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @Service
 public class DashboardService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-
-    public List<Post> getFriendPosts(User user) {
-
-        return postRepository.findPostsByFollowingAndUser(user.getFollowing(), user);
-    }
 
     public Post saveNewPost(Post post) {
         return postRepository.save(post);

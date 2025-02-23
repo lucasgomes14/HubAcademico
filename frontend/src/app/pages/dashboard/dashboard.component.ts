@@ -1,6 +1,6 @@
 import { routes } from './../../app.routes';
 import {Component, OnInit} from '@angular/core';
-import { DashboardService, DashboardPostDTO  } from '../../services/dashboard.service';
+import {DashboardService, DashboardPostDTO, LikeResponseDTO} from '../../services/dashboard.service';
 import {NgForOf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -68,5 +68,22 @@ export class DashboardComponent implements OnInit {
     navigateTo( route : String) {
       console.log("tentando navegar para:", route);
       this.router.navigate([route]);
+  }
+
+  like(id: number) {
+    const likeData = { idPost: id };
+
+    this.dashboardService.like(likeData).subscribe({
+      next: (response) => {
+        const post = this.posts.find(p => p.id === id);
+        if (post) {
+          post.likes = response.countLikes; // Ou ajuste conforme a resposta do backend
+          post.isLiked = response.hasLiked;
+        }
+      },
+      error: (error) => {
+        console.error('Erro ao curtir:', error);
+      }
+    });
   }
 }
