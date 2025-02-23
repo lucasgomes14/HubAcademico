@@ -243,3 +243,31 @@ button[type="submit"]:hover {
 form > * {
   margin-bottom: 15px;
 }
+
+#follow-button {
+  display: flex;
+  align-items: center; /* Alinha o texto e o ícone verticalmente */
+  justify-content: center;
+  gap: 7px;
+  background-color: white;
+  color: #241452;
+  font-weight: 500;
+  padding: 8px 30px;
+  transition: all 0.3s ease;
+}
+
+#following-button {
+  display: flex;
+  align-items: center; /* Alinha o texto e o ícone verticalmente */
+  justify-content: center;
+  gap: 7px;
+  background-color: #241452;
+  color: white;
+  font-weight: 500;
+  padding: 8px 30px;
+  transition: all 0.3s ease;
+}
+
+.follow-icon {
+  width: 15px;
+}

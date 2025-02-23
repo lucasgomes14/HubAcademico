@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { DashboardService, DashboardPostDTO  } from '../../services/dashboard.service';
+import {DashboardService, DashboardPostDTO, LikeResponseDTO} from '../../services/dashboard.service';
 import {NgForOf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
@@ -60,6 +60,23 @@ export class DashboardComponent implements OnInit {
       error: (err) => {
         console.error('Erro ao postar:', err);
         alert('Erro ao postar. Tente novamente.');
+      }
+    });
+  }
+
+  like(id: number) {
+    const likeData = { idPost: id };
+
+    this.dashboardService.like(likeData).subscribe({
+      next: (response) => {
+        const post = this.posts.find(p => p.id === id);
+        if (post) {
+          post.likes = response.countLikes; // Ou ajuste conforme a resposta do backend
+          post.isLiked = response.hasLiked;
+        }
+      },
+      error: (error) => {
+        console.error('Erro ao curtir:', error);
       }
     });
   }

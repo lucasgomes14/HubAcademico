@@ -10,7 +10,7 @@ public class UserProfileMapper {
     public UserProfileResponseDTO from(User user) {
         return new UserProfileResponseDTO(user.getName(), user.getLastName(),
                 user.getUsername(), user.getBio(), user.getDateAndTimeOfUserCreation(), user.getUserUpdateDateAndTime(),
-                user.getEmail(), user.getRole(), user.getCourse(), user.getProfilePicture(), user.getPosts(),
+                user.getEmail(), user.getRole(), user.getCourse(), user.getProfilePicture(),
                 user.getFollowing().size(), user.getFollowers().size());
     }
 

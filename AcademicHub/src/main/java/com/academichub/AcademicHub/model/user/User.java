@@ -1,6 +1,7 @@
 package com.academichub.AcademicHub.model.user;
 
 import com.academichub.AcademicHub.model.comment.Comment;
+import com.academichub.AcademicHub.model.like.Like;
 import com.academichub.AcademicHub.model.post.Post;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -63,6 +64,9 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Like> like = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
