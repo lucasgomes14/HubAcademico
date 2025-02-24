@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserProfileMapper {
-    public UserProfileResponseDTO from(User user) {
+    public UserProfileResponseDTO from(User user, boolean isFollowing) {
         return new UserProfileResponseDTO(user.getName(), user.getLastName(),
                 user.getUsername(), user.getBio(), user.getDateAndTimeOfUserCreation(), user.getUserUpdateDateAndTime(),
                 user.getEmail(), user.getRole(), user.getCourse(), user.getProfilePicture(),
-                user.getFollowing().size(), user.getFollowers().size());
+                user.getFollowing().size(), user.getFollowers().size(), isFollowing);
     }
 
     public User from(User user, UpdateUserProfileDTO updateUserProfileDTO) {

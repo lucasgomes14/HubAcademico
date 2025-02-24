@@ -20,6 +20,10 @@ public class UserProfileService {
         return userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
     }
 
+    public boolean isFollowing(User user, User friend) {
+        return userRepository.existsByUserIdAndFollowingId(user.getId(), friend.getId());
+    }
+
     private void validateUsername(String username) {
         if (username.trim().isEmpty()) {
             throw new EmptyUsernameException();
@@ -34,6 +38,25 @@ public class UserProfileService {
 
         getUserProfile(user.getUsername());
 
+        userRepository.save(user);
+    }
+
+    public void followUser(User user, String username) {
+        User following = userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
+
+        user.getFollowing().add(following);
+
+        userRepository.save(user);
+    }
+
+    @Transactional
+    public void unfollowUser(User user, String username) {
+        User following = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Usuário seguido não encontrado"));
+
+        user.getFollowing().remove(following);
+
+        userRepository.deleteByUserIdAndFollowingId(user.getId(), following.getId());
         userRepository.save(user);
     }
 }
