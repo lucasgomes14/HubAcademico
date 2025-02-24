@@ -7,6 +7,7 @@ import com.academichub.AcademicHub.model.post.Post;
 import com.academichub.AcademicHub.model.user.User;
 import com.academichub.AcademicHub.repository.LikeRepository;
 import com.academichub.AcademicHub.repository.PostRepository;
+import com.academichub.AcademicHub.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +19,14 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final LikeRepository likeRepository;
+    private final UserRepository userRepository;
 
     public Post findPostById(Long id) {
         return postRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User Not Found"));
     }
 
-    public List<Post> findAllPosts(User user) {
+    public List<Post> findAllPosts(String username) {
+        var user = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("User Not Found"));
         return postRepository.findPostsByUserIdOrderByDateDesc(user.getId());
     }
 

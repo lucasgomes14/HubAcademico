@@ -61,14 +61,14 @@ export class UserProfileService {
     return this.http.put<any>(`${this.apiUrl}/${username}`, updateUserProfileDTO, { headers });
   }
 
-  getPosts(): Observable<ProfilePostDTO[]> {
+  getPosts(username: string): Observable<ProfilePostDTO[]> {
     const token = sessionStorage.getItem('auth-token');
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
 
-    const params = new HttpParams().set('page', 'profile')
+    const params = new HttpParams().set('page', 'profile').set('username', username)
 
     return this.http.get<any[]>(this.urlFeed, { headers, params }).pipe(
       map(posts =>

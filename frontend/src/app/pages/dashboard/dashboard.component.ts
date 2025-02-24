@@ -1,6 +1,5 @@
-import { routes } from './../../app.routes';
 import {Component, OnInit} from '@angular/core';
-import {DashboardService, DashboardPostDTO, LikeResponseDTO} from '../../services/dashboard.service';
+import {DashboardPostDTO, DashboardService} from '../../services/dashboard.service';
 import {NgForOf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';

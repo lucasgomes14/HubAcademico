@@ -27,14 +27,14 @@ public class PostController {
     private final PostMapper postMapper;
 
     @GetMapping("/feed")
-    public ResponseEntity<List<DashboardPostDTO>> getPosts(@AuthenticationPrincipal User authenticatedUser, @RequestParam String page) {
+    public ResponseEntity<List<DashboardPostDTO>> getPosts(@AuthenticationPrincipal User authenticatedUser, @RequestParam String page, @RequestParam String username) {
         
         List<Post> posts;
         
         if (page.equals("dashboard")) {
             posts = postService.getFriendPosts(authenticatedUser);
         } else {
-            posts = postService.findAllPosts(authenticatedUser);
+            posts = postService.findAllPosts(username);
         }
 
         return ResponseEntity.ok().body(postMapper.from(posts, authenticatedUser));

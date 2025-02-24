@@ -37,7 +37,7 @@ export class DashboardService {
       Authorization: `Bearer ${token}`
     });
 
-    const params = new HttpParams().set('page', 'dashboard')
+    const params = new HttpParams().set('page', 'dashboard').set('username', 'null')
 
     return this.http.get<any[]>(this.urlFeed, { headers, params }).pipe(
       map(posts =>
