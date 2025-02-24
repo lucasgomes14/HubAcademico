@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {map, Observable, tap} from 'rxjs';
-import {DashboardPostDTO} from './dashboard.service';
+import {map, Observable} from 'rxjs';
 
 export interface UserProfile {
   name: string;
@@ -39,34 +38,27 @@ export interface LikeResponseDTO {
 export class UserProfileService {
 
   private urlFeed = 'http://localhost:8081/post/feed'
-  private apiUrl = 'http://localhost:8081/profile';
   private urlLike = 'http://localhost:8081/post/like'
+  private apiUrl = 'http://localhost:8081/profile';
+  private urlFollowUser = 'http://localhost:8081/profile/followUser';
+  private urlUnfollowUser = 'http://localhost:8081/profile/unfollowUser';
 
   constructor(private http: HttpClient) { }
 
   getUserProfile(username: string): Observable<UserProfile> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${sessionStorage.getItem('auth-token')}`
-    });
+    const headers = this.getToken()
 
     return this.http.get<UserProfile>(`${this.apiUrl}/${username}`, { headers });
   }
 
   updateUserProfile(username: string, updateUserProfileDTO: any) {
-
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${sessionStorage.getItem('auth-token')}`
-    });
+    const headers = this.getToken()
 
     return this.http.put<any>(`${this.apiUrl}/${username}`, updateUserProfileDTO, { headers });
   }
 
   getPosts(username: string): Observable<ProfilePostDTO[]> {
-    const token = sessionStorage.getItem('auth-token');
-
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
+    const headers = this.getToken()
 
     const params = new HttpParams().set('page', 'profile').set('username', username)
 
@@ -80,12 +72,28 @@ export class UserProfileService {
   }
 
   like(likeData: { idPost: number; }): Observable<any> {
-    const token = sessionStorage.getItem('auth-token');
-
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
+    const headers = this.getToken()
 
     return this.http.post<any>(this.urlLike, likeData, { headers });
+  }
+
+  followUser(username: { username: string }): Observable<any> {
+    const headers = this.getToken();
+
+    return this.http.post<any>(this.urlFollowUser, username , { headers });
+  }
+
+  unfollowUser( username: { username: string } ): Observable<any> {
+    const headers = this.getToken();
+
+    return this.http.post<any>(this.urlUnfollowUser , username, { headers });
+  }
+
+  getToken(): HttpHeaders {
+    const token = sessionStorage.getItem('auth-token');
+
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
   }
 }
