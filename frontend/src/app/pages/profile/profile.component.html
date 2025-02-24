@@ -23,12 +23,12 @@
 
   <aside class="profile-right">
     <button *ngIf="isOwner" type="button" (click)="showModal()">Editar Perfil</button>
-    <button *ngIf="!isFollowing" type="button" (click)="toggleFollow()" id="follow-button">
+    <button *ngIf="!isOwner && !userProfile.isFollowing"  type="button" (click)="toggleFollow()" id="follow-button">
       Follow
       <img src="/assets/follow.png" class="follow-icon">
     </button>
 
-    <button *ngIf="isFollowing" type="button" (click)="toggleFollow()" id="following-button">
+    <button *ngIf="!isOwner && userProfile.isFollowing" type="button" (click)="toggleFollow()" id="following-button">
       Following
       <img src="/assets/following.png" class="follow-icon">
     </button>

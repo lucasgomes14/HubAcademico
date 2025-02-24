@@ -23,7 +23,6 @@ export class ProfileComponent implements OnInit {
   isOwner: boolean = false;
   editProfileForm: FormGroup;
   posts: DashboardPostDTO[] = [];
-  isFollowing: boolean = false;  // Estado inicial
 
   constructor(
     private route: ActivatedRoute, // Para acessar os parâmetros da URL
@@ -44,7 +43,7 @@ export class ProfileComponent implements OnInit {
     // Obtém o username da URL
     this.username = this.route.snapshot.paramMap.get('username') || 'me';
 
-    if (this.username =='me') {
+    if (this.username == 'me') {
       this.router.navigate(['/profile']);  // Redireciona para o dashboard
       return;
     }
@@ -54,7 +53,6 @@ export class ProfileComponent implements OnInit {
       this.userProfileService.getUserProfile(this.username).subscribe({
         next: (data) => {
           this.userProfile = data; // Preenche os dados do perfil
-
           this.isOwner = sessionStorage.getItem("username") === this.username;
 
           this.editProfileForm.patchValue({
@@ -141,13 +139,33 @@ export class ProfileComponent implements OnInit {
   }
 
   toggleFollow(): void {
-    this.isFollowing = !this.isFollowing;  // Altera o estado do botão
-    // Aqui você pode fazer a lógica para enviar a informação ao backend (Spring Boot)
+    this.username = this.route.snapshot.paramMap.get('username') || ('me');
+
+    if (!this.userProfile.isFollowing){
+      this.userProfileService.followUser({username: this.username}).subscribe({
+        next: () => {
+          this.userProfile.isFollowing = !this.userProfile.isFollowing
+          this.userProfile.followersCount += 1
+        },
+        error: (error) => {
+          console.error('Erro ao tentar seguir usuário:', error);
+        }
+      });
+    } else {
+      this.userProfileService.unfollowUser({username: this.username}).subscribe({
+        next: () => {
+          this.userProfile.isFollowing = !this.userProfile.isFollowing
+          this.userProfile.followersCount -= 1
+        },
+        error: (error) => {
+          console.error('Erro ao tentar parar de seguir o usuário:', error);
+        }
+      });
+    }
   }
 
   loadPosts(): void {
     this.username = this.route.snapshot.paramMap.get('username') || ('me');
-    console.log(this.username)
     this.userProfileService.getPosts(this.username).subscribe({
       next: (data) => {
         this.posts = data;
