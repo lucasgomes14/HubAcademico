@@ -2,7 +2,7 @@ package com.academichub.AcademicHub.service;
 
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
-import com.academichub.AcademicHub.model.notification.NotificationDTO;
+import com.academichub.AcademicHub.dto.NotificationDTO;
 
 
 public class NotificationService {
