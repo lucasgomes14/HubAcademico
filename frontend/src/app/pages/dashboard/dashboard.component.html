@@ -13,44 +13,41 @@
     <header class="barra">
       <img src="assets/LogoHub.png" alt="Logo Hub Acadêmico">
     </header>
-    <!-- Nome do Hub -->
     <p class="nome_hub">Hub Acadêmico</p>
     <div>
-        <nav class="barra1">
-          <div class="item">
-            <img src="assets/casa (1).png" alt="casa">
-            <button (click)="navigateTo('/dashboard')">Home</button>
-          </div>
-          <div class="item">
-            <img src="assets/procurar (1).png" alt="lupa">
-            <button (click)="navigateTo('/search')">Search</button>
-          </div>
-          <div class="item">
-            <img src="assets/sino (1).png" alt="sino">
-            <button (click)="navigateTo('/notifications')">Notifications</button>
-          </div>
-          <div class="item">
-            <img src="assets/marca-paginas (1).png" alt="marca-paginas">
-            <button (click)="navigateTo('/saved')">Saved Posts</button>
-          </div>
-          <div class="item">
-            <img src="assets/do-utilizador (1).png" alt="do-utilizador">
-            <button (click)="navigateTo('/profile/me')">Profile</button>
-          </div>
-        </nav>
-      </div>
+      <nav class="barra1">
+        <div class="item">
+          <img src="assets/casa (1).png" alt="casa">
+          <button (click)="navigateTo('/dashboard')">Home</button>
+        </div>
+        <div class="item">
+          <img src="assets/procurar (1).png" alt="lupa">
+          <button (click)="navigateTo('/search')">Search</button>
+        </div>
+        <div class="item">
+          <img src="assets/sino (1).png" alt="sino">
+          <button (click)="navigateTo('/notifications')">Notifications</button>
+        </div>
+        <div class="item">
+          <img src="assets/marca-paginas (1).png" alt="marca-paginas">
+          <button (click)="navigateTo('/saved')">Saved Posts</button>
+        </div>
+        <div class="item">
+          <img src="assets/do-utilizador (1).png" alt="do-utilizador">
+          <button (click)="navigateTo('/profile/me')">Profile</button>
+        </div>
+      </nav>
     </div>
+  </div>
 
   <div class="post">
     <textarea [(ngModel)]="postText" placeholder="O que você está pensando?" class="texto-caixa"></textarea>
-
     <button class="enviar" (click)="postar()">
       <p>Postar</p>
       <img src="assets/aviao.png" alt="" class="botao_envio">
     </button>
 
     <div *ngFor="let post of posts" class="post-container">
-      <!-- Informações do usuário -->
       <div class="user-profile">
         <img [src]="'data:image/png;base64,' + post.profilePicture" alt="User Profile" class="profile-image">
         <div class="user-info">
@@ -58,26 +55,33 @@
           <small class="post-time">{{ post.minutesAgo }}</small>
         </div>
       </div>
-
-      <!-- Texto da postagem -->
       <p class="post-text">{{ post.description }}</p>
-
-      <!-- Ícones de curtidas e comentários -->
       <div class="post-row">
         <div class="icons">
           <div class="icon-item" (click)="like(post.id)">
-            <img [src]="post.isLiked ? '../../../assets/like.png' : '../../../assets/unlike.png'" alt="Like">
+            <img [src]="post.isLiked ? 'assets/like.png' : 'assets/unlike.png'" alt="Like">
             <span>{{ post.likes }}</span>
           </div>
-          <div class="icon-item">
-            <img src="assets/replies.png" alt="Comment">
-            <span>{{ post.comments }}</span>
+          <div class="icon-item comment-button" (click)="openCommentModal(post.id)">
+            <img src="assets/replies.png" alt="Comment" class="comment-icon">
+            <span class="comment-count">{{ post.comments }}</span>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-</body>
 
+<!-- Modal de Comentário -->
+<section id="commentModal" class="modal" *ngIf="isCommenting">
+  <div class="modal-content">
+    <button class="close-btn" (click)="closeCommentModal()">&times;</button>
+    <h2>ADICIONAR COMENTÁRIO</h2>
+    <form [formGroup]="commentForm" (ngSubmit)="submitComment()">
+      <textarea formControlName="comment" placeholder="Digite seu comentário" required></textarea>
+      <button type="submit" [disabled]="commentForm.invalid">Comentar</button>
+    </form>
+  </div>
+</section>
+</body>
 </html>
