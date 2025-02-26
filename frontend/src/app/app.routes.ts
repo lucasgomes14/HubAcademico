@@ -4,7 +4,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SavedComponent } from './pages/saved/saved.component';
-import { NotificationComponent } from './pages/notification/notification.component';
+import { NotificationsComponent } from './pages/notifications/notifications.component';
 import { SearchComponent } from './pages/search/search.component';
 
 export const routes: Routes = [
@@ -32,7 +32,7 @@ export const routes: Routes = [
     },
     {
       path: "notifications",
-      component: NotificationComponent
+      component: NotificationsComponent
     },
     {
         path: "saved",
