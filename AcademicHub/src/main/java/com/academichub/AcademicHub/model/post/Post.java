@@ -1,6 +1,7 @@
 package com.academichub.AcademicHub.model.post;
 
 import com.academichub.AcademicHub.model.comment.Comment;
+import com.academichub.AcademicHub.model.like.Like;
 import com.academichub.AcademicHub.model.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -25,16 +26,13 @@ public class Post {
     private String description;
 
     @Column(name = "content")
-    private String content;
+    private byte[] content;
 
     @Column(name = "date_and_time_of_publication", nullable = false)
     private LocalDateTime dateAndTimeOfPublication;
 
     @Column(name = "publication_update_date_and_time")
     private LocalDateTime publicationUpdateDateAndTime;
-
-    @Column(name = "likes")
-    private Integer likes;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -43,4 +41,7 @@ public class Post {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Like> likes = new ArrayList<>();
 }

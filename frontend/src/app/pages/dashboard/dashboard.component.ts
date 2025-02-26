@@ -1,12 +1,18 @@
-import { InvokeFunctionExpr } from '@angular/compiler';
-import { Component, Input, OnInit } from '@angular/core';
-
+import {Component, OnInit} from '@angular/core';
+import {DashboardPostDTO, DashboardService} from '../../services/dashboard.service';
+import {NgForOf} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 
+  imports: [
+    NgForOf,
+    FormsModule
+  ]
 })
 export class DashboardComponent implements OnInit {
   // Definindo os itens de menu do Dashboard
@@ -18,8 +24,65 @@ export class DashboardComponent implements OnInit {
     { name: 'Profile', icon: 'assets/do-utilizador (1).png' }
   ];
 
-  constructor() { }
+  posts: DashboardPostDTO[] = [];
+  postText: string = '';
+
+  constructor(private dashboardService: DashboardService, private router : Router) { }
 
   ngOnInit(): void {
+    this.loadFriendPosts();
+  }
+
+  loadFriendPosts(): void {
+    this.dashboardService.getFriendPosts().subscribe({
+      next: (data) => {
+        this.posts = data;
+      },
+      error: (error) => {
+        console.error('Erro ao carregar posts:', error);
+      }
+    });
+  }
+
+  postar() {
+    if (!this.postText.trim()) {
+      alert('O post não pode estar vazio!');
+      return;
+    }
+
+    const postData = { description: this.postText };
+
+    this.dashboardService.createPost(postData).subscribe({
+      next: () => {
+        alert('Post enviado com sucesso!');
+        this.postText = '';
+      },
+      error: (err) => {
+        console.error('Erro ao postar:', err);
+        alert('Erro ao postar. Tente novamente.');
+      }
+    });
+    }
+
+    navigateTo( route : String) {
+      console.log("tentando navegar para:", route);
+      this.router.navigate([route]);
+  }
+
+  like(id: number) {
+    const likeData = { idPost: id };
+
+    this.dashboardService.like(likeData).subscribe({
+      next: (response) => {
+        const post = this.posts.find(p => p.id === id);
+        if (post) {
+          post.likes = response.countLikes; // Ou ajuste conforme a resposta do backend
+          post.isLiked = response.hasLiked;
+        }
+      },
+      error: (error) => {
+        console.error('Erro ao curtir:', error);
+      }
+    });
   }
 }

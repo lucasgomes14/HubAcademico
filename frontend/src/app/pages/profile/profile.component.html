@@ -23,6 +23,15 @@
 
   <aside class="profile-right">
     <button *ngIf="isOwner" type="button" (click)="showModal()">Editar Perfil</button>
+    <button *ngIf="!isOwner && !userProfile.isFollowing"  type="button" (click)="toggleFollow()" id="follow-button">
+      Follow
+      <img src="/assets/follow.png" class="follow-icon">
+    </button>
+
+    <button *ngIf="!isOwner && userProfile.isFollowing" type="button" (click)="toggleFollow()" id="following-button">
+      Following
+      <img src="/assets/following.png" class="follow-icon">
+    </button>
     <div class="stats">
       <p><b>{{ userProfile?.followingCount || 0 }}</b> Following</p>
       <p><b>{{ userProfile?.followersCount || 0 }}</b> Followers</p>
@@ -54,19 +63,19 @@
 
 <main class="profile-info">
   <section class="posts">
-    <article class="post" *ngFor="let post of userProfile?.posts">
+    <article class="post" *ngFor="let post of posts">
       <header class="post-header">
         <img [src]="getProfilePicture()" alt="Profile Image">
         <div class="post-info">
           <p>{{ userProfile.name || "" }}</p>
-          <time [attr.datetime]="post.dateAndTimeOfPublication"> {{ post.dateAndTimeOfPublication | date:'short' }}
-          </time>
+          <small class="post-time">{{ post.minutesAgo }}</small>
         </div>
       </header>
-      <p class="post-text">{{ post.description || "" }}</p>
+      <p class="post-text">{{ post.description }}</p>
       <footer class="post-footer">
-        <span><img src="assets/likes.png" alt="Likes">{{ post.likes || "0" }}</span>
-        <span><img src="assets/replies.png" alt="Replies">{{ post.comments.length || "0" }}</span>
+        <span (click)="like(post.id)"><img  [src]="post.isLiked ? '../../../assets/like.png' : '../../../assets/unlike.png'"></span>
+        <span>{{ post.likes }}</span>
+        <span><img src="assets/replies.png" alt="Replies"></span>
       </footer>
     </article>
   </section>

@@ -1,76 +1,90 @@
+a {
+  color: #ffffff;
+}
+
+.post {
+  margin-left: 280px;
+  margin-top: -200px; /* Evita valores negativos que podem causar problemas */
+  width: calc(100% - 280px);
+  max-width: 800px;
+  overflow-y: auto;
+}
 
 body {
   background-color: #1B1837;
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: center; /* Centraliza horizontalmente o conteúdo */
   flex-direction: column;
-  overflow-y: auto;
-  align-items: center; /* Centraliza verticalmente */
+  align-items: center;
   width: 100%;
-  height: 100%;
+  min-height: 100vh; /* Mudar de height: 100% para min-height: 100vh */
+  overflow-y: auto; /* Garante que o scroll aparece */
   overflow-x: hidden;
 }
 
-.post {
-  margin-left: 280px;
+.post-container {
+  width: 800px;
+  background: #1c183d;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  padding: 20px;
+  color: #ffffff;
+  margin: 20px auto;
 }
-
 
 .sidebar {
-  display: flex;
-  margin-left: 180px;
+  position: fixed; /* Mantém a sidebar fixa ao lado */
+  top: 0;
+  left: 190px; /* Espaço de 20px da borda esquerda da tela */
+  width: 250px; /* Largura da sidebar */
   background-color: #2A2649;
   padding: 10px 15px;
-  min-width: 250px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
+  display: flex;
   flex-direction: column;
   overflow-y: auto;
+  height: 100%; /* Garantir que ocupe a altura total da tela */
 }
 
-@media (max-width: 1240px) {
+@media (max-width: 1000px) {
   .sidebar {
-    width: 200px; 
+    width: 200px;
   }
 
   .texto-caixa {
-    margin-left: 220px; 
+    margin-left: 220px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1008px) {
   .sidebar {
-    width: 150px; 
+    width: 150px;
   }
 
   .texto-caixa {
-    margin-left: 170px; 
+    margin-left: 170px;
   }
 
   .item p {
-    font-size: 12px; 
+    font-size: 12px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px) { //notebook
   .sidebar {
     width: 100px;
   }
 
   .texto-caixa {
-    margin-left: 120px; 
+    margin-left: 120px;
   }
 
   .barra img {
-    width: 80px; 
+    width: 80px;
   }
 
   .item p {
-    font-size: 10px; 
+    font-size: 10px;
   }
 }
 
@@ -134,6 +148,7 @@ body {
   align-items: center;
   height: auto;
   resize: none;
+  color: #ffffff;
 }
 
 .texto-caixa textarea {
@@ -144,7 +159,7 @@ body {
   font-size: 15px;
   resize: none;
   width: 100%;
-  text-align: center; 
+  text-align: center;
 }
 
 .texto-caixa textarea::placeholder {
@@ -153,15 +168,7 @@ body {
   text-align: center;
 }
 
-.post-container {
-  width: 800px;
-  background: #1c183d;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
-  border-radius: 6px;
-  padding: 20px;
-  color: #ffffff;
-  margin: 20px auto;
-}
+
 
 @media (max-width: 1024px) {
   .texto-caixa,
@@ -258,4 +265,29 @@ body {
 
 .icon-item span {
   font-size: 14px;
+}
+
+.enviar {
+  display: flex;
+  align-items: center;
+  background: #1c183d;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 1.0s ease;
+  gap: 6px;
+  margin-left: 690px;
+}
+
+.enviar:hover {
+  background: #403888;
+}
+
+.botao_envio {
+  width: 18px;
+  height: 18px;
 }

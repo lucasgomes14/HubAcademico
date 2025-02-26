@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserProfileService} from '../../services/user-profile.service';
-import {DatePipe, NgForOf, NgIf} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {DashboardPostDTO} from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   imports: [
     NgForOf,
-    DatePipe,
     FormsModule,
     ReactiveFormsModule,
     NgIf
@@ -21,7 +21,8 @@ export class ProfileComponent implements OnInit {
   userProfile: any = null; // Variável para armazenar os dados do perfil
   username: string = '';    // Variável para armazenar o username da URL
   isOwner: boolean = false;
-  editProfileForm : FormGroup;
+  editProfileForm: FormGroup;
+  posts: DashboardPostDTO[] = [];
 
   constructor(
     private route: ActivatedRoute, // Para acessar os parâmetros da URL
@@ -38,11 +39,12 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadPosts();
     // Obtém o username da URL
-    this.username = this.route.snapshot.paramMap.get('username') || '';
+    this.username = this.route.snapshot.paramMap.get('username') || 'me';
 
-    if (!this.username) {
-      this.router.navigate(['/dashboard']);  // Redireciona para o dashboard
+    if (this.username == 'me') {
+      this.router.navigate(['/profile']);  // Redireciona para o dashboard
       return;
     }
 
@@ -51,7 +53,6 @@ export class ProfileComponent implements OnInit {
       this.userProfileService.getUserProfile(this.username).subscribe({
         next: (data) => {
           this.userProfile = data; // Preenche os dados do perfil
-
           this.isOwner = sessionStorage.getItem("username") === this.username;
 
           this.editProfileForm.patchValue({
@@ -73,7 +74,7 @@ export class ProfileComponent implements OnInit {
   getProfilePicture(): string {
     return this.userProfile?.profilePicture
       ? `data:image/jpeg;base64,${this.userProfile.profilePicture}`
-      : 'assets/profile-image.png'; // Imagem padrão caso não tenha
+      : 'assets/Default-Profile-Picture.png'; // Imagem padrão caso não tenha
   }
 
   showModal() {
@@ -98,13 +99,21 @@ export class ProfileComponent implements OnInit {
   onImageChange(event: any) {
     const file = event.target.files[0];
     if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.editProfileForm.patchValue({profilePicture: reader.result?.toString().split(',')[1]})
+      };
+
+      reader.readAsDataURL(file);
+    } else {
       this.editProfileForm.patchValue({
-        profilePicture: file
+        profilePicture: null
       });
     }
   }
 
   onSubmit() {
+    this.loadPosts();
     if (this.editProfileForm.valid) {
       const updateUserProfileDTO = {
         name: this.editProfileForm.value.name,
@@ -127,5 +136,60 @@ export class ProfileComponent implements OnInit {
         }
       });
     }
+  }
+
+  toggleFollow(): void {
+    this.username = this.route.snapshot.paramMap.get('username') || ('me');
+
+    if (!this.userProfile.isFollowing){
+      this.userProfileService.followUser({username: this.username}).subscribe({
+        next: () => {
+          this.userProfile.isFollowing = !this.userProfile.isFollowing
+          this.userProfile.followersCount += 1
+        },
+        error: (error) => {
+          console.error('Erro ao tentar seguir usuário:', error);
+        }
+      });
+    } else {
+      this.userProfileService.unfollowUser({username: this.username}).subscribe({
+        next: () => {
+          this.userProfile.isFollowing = !this.userProfile.isFollowing
+          this.userProfile.followersCount -= 1
+        },
+        error: (error) => {
+          console.error('Erro ao tentar parar de seguir o usuário:', error);
+        }
+      });
+    }
+  }
+
+  loadPosts(): void {
+    this.username = this.route.snapshot.paramMap.get('username') || ('me');
+    this.userProfileService.getPosts(this.username).subscribe({
+      next: (data) => {
+        this.posts = data;
+      },
+      error: (error) => {
+        console.error('Erro ao carregar posts:', error);
+      }
+    });
+  }
+
+  like(id: number) {
+    const likeData = {idPost: id};
+
+    this.userProfileService.like(likeData).subscribe({
+      next: (response) => {
+        const post = this.posts.find(p => p.id === id);
+        if (post) {
+          post.likes = response.countLikes; // Ou ajuste conforme a resposta do backend
+          post.isLiked = response.hasLiked;
+        }
+      },
+      error: (error) => {
+        console.error('Erro ao curtir:', error);
+      }
+    });
   }
 }
