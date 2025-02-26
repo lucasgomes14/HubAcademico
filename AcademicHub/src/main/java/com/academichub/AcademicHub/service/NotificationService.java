@@ -1,52 +1,19 @@
 package com.academichub.AcademicHub.service;
 
-import java.util.List;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.academichub.AcademicHub.model.notification.NotificationDTO;
 
-import com.academichub.AcademicHub.util.AuthUtil;
-import com.academichub.AcademicHub.model.notification.Notification;
-import com.academichub.AcademicHub.repository.NotificationRepository;
 
-@Service
 public class NotificationService {
-    @Autowired
-    private NotificationRepository notificationRepository;
+    private final SimpMessagingTemplate messagingTemplate;
 
-    public void createNotification(Long userId, String action, Long referenceId) {
-        Notification notification = new Notification();
-        notification.setUserId(userId);
-        notification.setAction(action);
-        notification.setReferenceId(referenceId);
-        notification.setRead(false);
-
-        notificationRepository.save(notification);  
-        System.out.println("Notificação criada: " + notification);
+    public NotificationService(SimpMessagingTemplate messagingTemplate) {
+        this.messagingTemplate = messagingTemplate;
     }
 
-    public List<Notification> getUnreadNotifications(Long userId) {
-        userId = AuthUtil.getAuthenticatedUserId(); 
-
-        if (userId == null) {
-            System.out.println("Erro: Usuário não autenticado!");
-            return List.of();
-        }
-
-        List<Notification> notifications = notificationRepository.findByUserIdAndReadFalse(userId);
-        System.out.println("Buscando notificações não lidas para userId: " + userId);
-        System.out.println("Notificações encontradas: " + notifications);
-        return notifications;
-    }
-
-    public void markAllNotificationsAsRead(Long userId) {
-        // Obtém todas as notificações não lidas para o usuário
-        List<Notification> unreadNotifications = notificationRepository.findByUserIdAndReadFalse(userId);
-        
-        // Marca todas como lidas
-        for (Notification notification : unreadNotifications) {
-            notification.setRead(true);
-            notificationRepository.save(notification);
-        }
+    public void sendNotification(String message, String type, String user, String post) {
+        NotificationDTO notification = new NotificationDTO(message, type, user, post);
+        messagingTemplate.convertAndSend("/notifications", notification);
     }
 }
