@@ -291,3 +291,110 @@ body {
   width: 18px;
   height: 18px;
 }
+
+/* Estilo para o Modal de Comentário */
+.modal {
+  display:flex; /* Inicialmente escondido */
+  position: absolute;
+  top: 0;
+  left: 580px;
+  width: 807px;
+  height: 100%;
+  background: rgba(39, 26, 63, 0.5); /* Fundo escuro */
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color:#2A2649;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+}
+
+textarea {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  resize: none;
+  box-sizing: border-box;
+}
+
+button[type="submit"] {
+  background-color: #1c183d;
+  color: white;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+
+
+button[type="submit"]:disabled {
+  background-color: #403888;
+  cursor: not-allowed;
+}
+
+.post-text {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.post-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.icon-item img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.comment-button {
+  display: flex;
+  align-items: center;
+}
+
+.comment-count {
+  margin-left: 5px;
+}
+
+.post-container .comments {
+  margin-top: 15px;
+  padding-left: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.post-container .comments .comment {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #ececec;
+  border-radius: 5px;
+}

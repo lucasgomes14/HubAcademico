@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {DashboardPostDTO, DashboardService} from '../../services/dashboard.service';
 import {NgForOf} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {ReactiveFormsModule } from '@angular/forms';
+import {CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,11 +13,12 @@ import {Router} from '@angular/router';
 
   imports: [
     NgForOf,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule
   ]
 })
 export class DashboardComponent implements OnInit {
-  // Definindo os itens de menu do Dashboard
   menuItems = [
     { name: 'Home', icon: 'assets/casa (1).png' },
     { name: 'Search', icon: 'assets/procurar (1).png' },
@@ -26,8 +29,15 @@ export class DashboardComponent implements OnInit {
 
   posts: DashboardPostDTO[] = [];
   postText: string = '';
+  isCommenting: boolean = false;
+  commentForm: FormGroup;
+  activePostId: number | null = null;
 
-  constructor(private dashboardService: DashboardService, private router : Router) { }
+  constructor(private dashboardService: DashboardService, private router: Router, private fb: FormBuilder) {
+    this.commentForm = this.fb.group({
+      comment: ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
     this.loadFriendPosts();
@@ -56,17 +66,18 @@ export class DashboardComponent implements OnInit {
       next: () => {
         alert('Post enviado com sucesso!');
         this.postText = '';
+        this.loadFriendPosts();
       },
       error: (err) => {
         console.error('Erro ao postar:', err);
         alert('Erro ao postar. Tente novamente.');
       }
     });
-    }
+  }
 
-    navigateTo( route : String) {
-      console.log("tentando navegar para:", route);
-      this.router.navigate([route]);
+  navigateTo(route: String) {
+    console.log("tentando navegar para:", route);
+    this.router.navigate([route]);
   }
 
   like(id: number) {
@@ -76,12 +87,38 @@ export class DashboardComponent implements OnInit {
       next: (response) => {
         const post = this.posts.find(p => p.id === id);
         if (post) {
-          post.likes = response.countLikes; // Ou ajuste conforme a resposta do backend
+          post.likes = response.countLikes;
           post.isLiked = response.hasLiked;
         }
       },
       error: (error) => {
         console.error('Erro ao curtir:', error);
+      }
+    });
+  }
+
+  openCommentModal(postId: number) {
+    this.isCommenting = true;
+    this.activePostId = postId;
+  }
+
+  closeCommentModal() {
+    this.isCommenting = false;
+  }
+
+  submitComment() {
+    if (!this.activePostId) return;
+    const commentData = { postId: this.activePostId, comment: this.commentForm.value.comment };
+
+    this.dashboardService.addComment(commentData).subscribe({
+      next: () => {
+        alert('Comentário adicionado com sucesso!');
+        this.closeCommentModal();
+        this.loadFriendPosts();
+      },
+      error: (err: any) => {
+        console.error('Erro ao comentar:', err);
+        alert('Erro ao comentar. Tente novamente.');
       }
     });
   }

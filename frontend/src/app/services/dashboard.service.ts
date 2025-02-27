@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {map, Observable} from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { map, Observable } from "rxjs";
 
 export interface DashboardPostDTO {
   id: number;
@@ -23,12 +23,12 @@ export interface LikeResponseDTO {
 })
 export class DashboardService {
 
-  private urlFeed = 'http://localhost:8081/post/feed'
-  private urlPost = 'http://localhost:8081/dashboard/post'
-  private urlLike = 'http://localhost:8081/post/like'
+  private urlFeed = 'http://localhost:8081/post/feed';
+  private urlPost = 'http://localhost:8081/dashboard/post';
+  private urlLike = 'http://localhost:8081/post/like';
+  private urlComment = 'http://localhost:8081/post/comment'; // Adicione o endpoint correto da API
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getFriendPosts(): Observable<DashboardPostDTO[]> {
     const token = sessionStorage.getItem('auth-token');
@@ -37,7 +37,7 @@ export class DashboardService {
       Authorization: `Bearer ${token}`
     });
 
-    const params = new HttpParams().set('page', 'dashboard').set('username', 'null')
+    const params = new HttpParams().set('page', 'dashboard').set('username', 'null');
 
     return this.http.get<any[]>(this.urlFeed, { headers, params }).pipe(
       map(posts =>
@@ -58,7 +58,7 @@ export class DashboardService {
     return this.http.post<any>(this.urlPost, postData, { headers });
   }
 
-  like(likeData: { idPost: number; }): Observable<any> {
+  like(likeData: { idPost: number }): Observable<any> {
     const token = sessionStorage.getItem('auth-token');
 
     const headers = new HttpHeaders({
@@ -66,5 +66,16 @@ export class DashboardService {
     });
 
     return this.http.post<any>(this.urlLike, likeData, { headers });
+  }
+
+  addComment(commentData: { postId: number; comment: string }): Observable<any> {
+    const token = sessionStorage.getItem('auth-token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(this.urlComment, commentData, { headers });
   }
 }
