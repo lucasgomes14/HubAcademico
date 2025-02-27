@@ -5,13 +5,16 @@ import com.academichub.AcademicHub.dto.LoginResponseDTO;
 import com.academichub.AcademicHub.dto.RegisterDTO;
 import com.academichub.AcademicHub.infra.security.TokenService;
 import com.academichub.AcademicHub.mapper.UserMapper;
-import com.academichub.AcademicHub.model.user.*;
+import com.academichub.AcademicHub.model.user.User;
 import com.academichub.AcademicHub.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 

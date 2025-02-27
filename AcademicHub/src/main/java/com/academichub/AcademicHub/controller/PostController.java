@@ -1,8 +1,7 @@
 package com.academichub.AcademicHub.controller;
 
-import com.academichub.AcademicHub.dto.DashboardPostDTO;
-import com.academichub.AcademicHub.dto.LikeDTO;
-import com.academichub.AcademicHub.dto.LikeResponseDTO;
+import com.academichub.AcademicHub.dto.*;
+import com.academichub.AcademicHub.mapper.CommentMapper;
 import com.academichub.AcademicHub.mapper.LikeMapper;
 import com.academichub.AcademicHub.mapper.PostMapper;
 import com.academichub.AcademicHub.model.post.Post;
@@ -25,6 +24,7 @@ public class PostController {
 
     private final LikeMapper likeMapper;
     private final PostMapper postMapper;
+    private final CommentMapper commentMapper;
 
     @GetMapping("/feed")
     public ResponseEntity<List<DashboardPostDTO>> getPosts(@AuthenticationPrincipal User authenticatedUser, @RequestParam String page, @RequestParam String username) {
@@ -50,6 +50,18 @@ public class PostController {
             var likeResponse = postService.like(like);
 
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(likeResponse);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PostMapping("/comment")
+    public ResponseEntity<CommentResponseDTO> addComment(@AuthenticationPrincipal User user, @RequestParam Long postId, @RequestBody CommentDTO commentDTO) {
+        try {
+            var post = postService.findPostById(postId);
+            var comment = commentMapper.from(commentDTO, user, post);
+
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(postService.addComment(comment));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

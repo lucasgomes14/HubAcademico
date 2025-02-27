@@ -1,15 +1,14 @@
 package com.academichub.AcademicHub.controller;
 
-import java.util.List;
-
+import com.academichub.AcademicHub.model.user.User;
+import com.academichub.AcademicHub.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.academichub.AcademicHub.model.user.User;
-import com.academichub.AcademicHub.repository.UserRepository;
+import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")

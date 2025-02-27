@@ -1,10 +1,14 @@
 package com.academichub.AcademicHub.service;
 
+import com.academichub.AcademicHub.dto.CommentResponseDTO;
 import com.academichub.AcademicHub.dto.LikeResponseDTO;
+import com.academichub.AcademicHub.exceptions.CommentNullException;
 import com.academichub.AcademicHub.exceptions.UserNotFoundException;
+import com.academichub.AcademicHub.model.comment.Comment;
 import com.academichub.AcademicHub.model.like.Like;
 import com.academichub.AcademicHub.model.post.Post;
 import com.academichub.AcademicHub.model.user.User;
+import com.academichub.AcademicHub.repository.CommentRepository;
 import com.academichub.AcademicHub.repository.LikeRepository;
 import com.academichub.AcademicHub.repository.PostRepository;
 import com.academichub.AcademicHub.repository.UserRepository;
@@ -20,6 +24,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final LikeRepository likeRepository;
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
 
     public Post findPostById(Long id) {
         return postRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User Not Found"));
@@ -62,5 +67,15 @@ public class PostService {
 
     public void deleteLike(Like like) {
         likeRepository.delete(like);
+    }
+
+    public CommentResponseDTO addComment(Comment comment) {
+        if (comment.getText().isEmpty()) {
+            throw new CommentNullException();
+        }
+
+        commentRepository.save(comment);
+
+        return new CommentResponseDTO(comment.getText(), comment.getUser().getName(), comment.getPublicationUpdateDateAndTime());
     }
 }

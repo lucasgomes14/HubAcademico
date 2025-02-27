@@ -1,8 +1,6 @@
 package com.academichub.AcademicHub.service;
 
-import com.academichub.AcademicHub.dto.RegisterDTO;
 import com.academichub.AcademicHub.exceptions.UserNotFoundException;
-import com.academichub.AcademicHub.mapper.UserMapper;
 import com.academichub.AcademicHub.model.user.User;
 import com.academichub.AcademicHub.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
