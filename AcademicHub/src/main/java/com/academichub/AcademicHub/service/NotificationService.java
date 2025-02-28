@@ -4,7 +4,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import com.academichub.AcademicHub.dto.NotificationDTO;
 
-public class NotificationService {
+public class NotificationService { 
     private final SimpMessagingTemplate messagingTemplate;
 
     public NotificationService(SimpMessagingTemplate messagingTemplate) {

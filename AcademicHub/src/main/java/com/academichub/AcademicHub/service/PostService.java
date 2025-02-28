@@ -20,6 +20,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final LikeRepository likeRepository;
     private final UserRepository userRepository;
+    private final NotificationService notificationService; 
 
     public Post findPostById(Long id) {
         return postRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User Not Found"));
@@ -48,6 +49,14 @@ public class PostService {
 
         if (like == null) {
             addLike(newLike);
+
+            var owner = post.getUser();
+            var liker = newLike.getUser();
+
+            if (!owner.getUsername().equals(liker.getUsername())) {
+                notificationService.sendNotification(liker.getUsername() + "curtiu seu post", "like", 
+                owner.getUsername(), post.getId().toString());
+            }
 
             return new LikeResponseDTO(post.getLikes().size(), true);
         }
