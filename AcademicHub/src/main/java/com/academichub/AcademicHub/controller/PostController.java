@@ -41,9 +41,9 @@ public class PostController {
     }
 
     @PostMapping("/like")
-    public ResponseEntity<LikeResponseDTO> like(@AuthenticationPrincipal User user, @RequestBody LikeDTO likeDTO) {
+    public ResponseEntity<LikeResponseDTO> like(@AuthenticationPrincipal User user, @RequestParam Long idPost) {
         try {
-            var post = postService.findPostById(likeDTO.idPost());
+            var post = postService.findPostById(idPost);
 
             var like = likeMapper.from(user, post);
 
