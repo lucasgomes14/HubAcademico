@@ -65,7 +65,9 @@ export class DashboardService {
       Authorization: `Bearer ${token}`
     });
 
-    return this.http.post<any>(this.urlLike, likeData, { headers });
+    const params = new HttpParams().set('idPost', likeData.idPost);
+
+    return this.http.post<any>(this.urlLike, { headers, params });
   }
 
   addComment(commentData: { postId: number; comment: string }): Observable<any> {
